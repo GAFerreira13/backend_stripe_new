@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const stripe = require('stripe')(API_KEY);
+const stripe = require('stripe')('API_KEY');
 const cors = require('cors');
 
 // Middleware to enable CORS ...
