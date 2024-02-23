@@ -3,7 +3,7 @@ const app = express();
 const stripe = require('stripe')(API_KEY);
 const cors = require('cors');
 
-// Middleware to enable CORS
+// Middleware to enable CORS ...
 app.use(cors());
 
 // Middleware to parse JSON bodies
