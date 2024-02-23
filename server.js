@@ -47,7 +47,12 @@ app.post('/create-checkout-session', async (req, res) => {
 
         //res.status(200).json({ sessionId: session.id });
         //res.redirect(303, session.url);
-        res.json({url: session.url})
+        //res.json({ url: session.url })
+        
+        // Access the URL from the session's payment_intent object
+        const url = session.payment_intent.charges.data[0].receipt_url;
+
+        res.json({ url });
 
     } catch (error) {
         console.error('Error creating checkout session:', error);
