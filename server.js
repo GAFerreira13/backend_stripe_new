@@ -27,11 +27,18 @@ app.post('/create-checkout-session', async (req, res) => {
             submit_type: 'auto',
             billing_address_collection: 'auto',
             
-            line_items: cartItems.map(item => ({
+            /*line_items: cartItems.map(item => ({
                 price: item.price,
                 quantity: item.quantity,
                 tax_rates: [item.tax_rates]
-            })),
+            })),*/
+            line_items: [
+                {
+                    price: item.price,
+                    quantity: item.quantity,
+                    tax_rates: item.tax_rates
+                },
+            ],
               mode: 'payment',
               success_url: 'https://fluidinova.webflow.io/success',
               cancel_url: 'https://fluidinova.webflow.io/cancel',
