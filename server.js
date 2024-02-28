@@ -32,13 +32,11 @@ app.post('/create-checkout-session', async (req, res) => {
                 quantity: item.quantity,
                 tax_rates: [item.tax_rates]
             })),*/
-            line_items: [
-                {
-                    price: item.price,
-                    quantity: item.quantity,
-                    tax_rates: item.tax_rates
-                },
-            ],
+            line_items: cartItems.map(item => ({
+                price: [item.price],
+                quantity: item.quantity,
+                tax_rates: [item.tax_rates] // Ensure tax_rates is an array even if it contains a single tax rate
+            })),
               mode: 'payment',
               success_url: 'https://fluidinova.webflow.io/success',
               cancel_url: 'https://fluidinova.webflow.io/cancel',
