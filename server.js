@@ -10,11 +10,12 @@ app.use(express.json());
 const YOUR_DOMAIN = 'https://fluidinova.webflow.io';
 
 app.post('/validate-eori', async (req, res) => {
-    const { eori } = req.body;
+    const { eoris } = req.body;
 
     try {
         const response = await axios.post('https://api.service.hmrc.gov.uk/customs/eori/lookup/check-multiple-eori', {
-            eoris: [eori]
+            //eoris: [eori]
+            eoris: eoris
         }, {
             headers: {
                 'Content-Type': 'application/json'
