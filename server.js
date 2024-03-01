@@ -2,16 +2,68 @@ const express = require('express');
 const app = express();
 const stripe = require('stripe')(process.env.API_KEY);
 const cors = require('cors');
+const fetch = require('node-fetch');
 
-// Middleware to enable CORS ...
 app.use(cors());
-
-// Middleware to parse JSON bodies
 app.use(express.json());
 
 const YOUR_DOMAIN = 'https://fluidinova.webflow.io';
 
-// Endpoint to create checkout session
+app.post('/validate-eori', async (req, res) => {
+    const { eori } = req.body;
+
+    try {
+        const response = await fetch('https://api.service.hmrc.gov.uk/customs/eori/lookup/check-multiple-eori', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ eoris: [eori] })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to validate EORI');
+        }
+
+        const data = await response.json();
+
+        if (data.status === 200) {
+            res.status(200).json({ message: "EORI - Success!" });
+        } else if (data.status === 400) {
+            res.status(400).json({ message: "EORI - Invalid number, cannot purchase as business" });
+        } else if (data.status === 600) {
+            res.status(500).json({ message: "EORI - Server error. Please contact admin" });
+        }
+    } catch (error) {
+        console.error('Error validating EORI:', error);
+        res.status(500).json({ error: 'An error occurred while validating EORI' });
+    }
+});
+
+app.get('/validate-vat/:vat_number', async (req, res) => {
+    const { vat_number } = req.params;
+
+    try {
+        const response = await fetch(`https://api.vatcheckapi.com/v2/check?vat_number=${vat_number}`, {
+            method: 'GET',
+            headers: {
+                'X-Api-Key': 'vat_live_YhSULynHRB5Nae6pJdDqk0IaEr3jUngdReMQxWnQ'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to validate VAT number');
+        }
+
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error validating VAT number:', error);
+        res.status(500).json({ error: 'An error occurred while validating VAT number' });
+    }
+});
+
+
 app.post('/create-checkout-session', async (req, res) => {
     const { customer, shippingAddress, cartItems } = req.body;
 
@@ -20,22 +72,16 @@ app.post('/create-checkout-session', async (req, res) => {
     }*/
 
 
-    try {//so depois das verificacoes todas...
+    try {
         const session = await stripe.checkout.sessions.create({
-            //payment_method_types: ['card'],
             customer_email: customer.email,
             submit_type: 'auto',
             billing_address_collection: 'auto',
             
-            /*line_items: cartItems.map(item => ({
-                price: item.price,
-                quantity: item.quantity,
-                tax_rates: [item.tax_rates]
-            })),*/
             line_items: cartItems.map(item => ({
                 price: item.price,
                 quantity: item.quantity,
-                tax_rates: [item.tax_rates] // Ensure tax_rates is an array even if it contains a single tax rate
+                tax_rates: [item.tax_rates]
             })),
               mode: 'payment',
               success_url: 'https://fluidinova.webflow.io/success',
@@ -51,12 +97,9 @@ app.post('/create-checkout-session', async (req, res) => {
             }
               
             });
-
-        
+ 
         res.json({ url: session.url })
         
-        
-
     } catch (error) {
         console.error('Error creating checkout session:', error);
         res.status(500).json({ error: 'An error occurred while creating checkout session' });
