@@ -22,6 +22,8 @@ app.post('/validate-eori', async (req, res) => {
             }
         });
 
+        res.json(response.data);
+
         if (!response.data || !response.data.status) {
             throw new Error('Failed to validate EORI');
         }
