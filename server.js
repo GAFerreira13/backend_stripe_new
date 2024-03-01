@@ -45,9 +45,10 @@ app.get('/validate-vat/:vat_number', async (req, res) => {
     const { vat_number } = req.params;
 
     try {
-        const response = await axios.get(`https://api.vatcheckapi.com/v2/check?vat_number=${vat_number}`, {
+        const apiKey = 'vat_live_YhSULynHRB5Nae6pJdDqk0IaEr3jUngdReMQxWnQ';
+        const response = await axios.get(`https://api.vatcheckapi.com/v2/check?vat_number=${vat_number}&apikey=${apiKey}`, {
             headers: {
-                'X-Api-Key': 'vat_live_YhSULynHRB5Nae6pJdDqk0IaEr3jUngdReMQxWnQ'
+                'X-Api-Key': apiKey
             }
         });
         res.json(response.data);
