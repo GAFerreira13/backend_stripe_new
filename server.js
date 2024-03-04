@@ -25,6 +25,7 @@ app.post('/validate-eori', async (req, res) => {
         res.json(response.data);
 
         if (!response.data || !response.data.status) {
+            res.status(500).json({ error: 'An error occurred while validating EORI' });
             throw new Error('Failed to validate EORI');
         }
 
@@ -36,8 +37,8 @@ app.post('/validate-eori', async (req, res) => {
             res.status(500).json({ message: "EORI - Server error. Please contact admin" });
         }
     } catch (error) {
-        console.error('Error validating EORI:', error);
         res.status(500).json({ error: 'An error occurred while validating EORI' });
+        console.error('Error validating EORI:', error);
     }
 });
 
@@ -54,8 +55,8 @@ app.get('/validate-vat/:vat_number', async (req, res) => {
         res.json(response.data);
         
     } catch (error) {
-        console.error('Error validating VAT number:', error);
         res.status(500).json({ error: 'An error occurred while validating VAT number' });
+        console.error('Error validating VAT number:', error);
     }
 });
 
@@ -97,8 +98,8 @@ app.post('/create-checkout-session', async (req, res) => {
         res.json({ url: session.url })
         
     } catch (error) {
-        console.error('Error creating checkout session:', error);
         res.status(500).json({ error: 'An error occurred while creating checkout session' });
+        console.error('Error creating checkout session:', error);
     }
 });
 
