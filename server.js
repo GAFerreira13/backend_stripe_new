@@ -14,21 +14,18 @@ app.post('/validate-eori', async (req, res) => {
 
     try {
         const response = await axios.post('https://api.service.hmrc.gov.uk/customs/eori/lookup/check-multiple-eori', {
-            //eoris: [eori]
             eoris: eoris
         }, {
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-
-        res.json(response.data);
-
+    
         if (!response.data || !response.data.status) {
             res.status(500).json({ error: 'An error occurred while validating EORI' });
             throw new Error('Failed to validate EORI');
         }
-
+    
         if (response.data.status === 200) {
             res.status(200).json({ message: "EORI - Success!" });
         } else if (response.data.status === 400) {
