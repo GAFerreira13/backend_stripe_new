@@ -21,12 +21,12 @@ app.post('/validate-eori', async (req, res) => {
             }
         });
     
+        res.json(response.data);
+        console.log('Received eoris:', eoris);
         if (!response.data || !response.data.status) {
             res.status(500).json({ error: 'An error occurred while validating EORI' });
             throw new Error('Failed to validate EORI');
-        }
-    
-        if (response.data.status === 200) {
+        } else if (response.data.status === 200) {
             res.status(200).json({ message: "EORI - Success!" });
         } else if (response.data.status === 400) {
             res.status(400).json({ message: "EORI - Invalid number, cannot purchase as business" });
