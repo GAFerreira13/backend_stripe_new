@@ -2,12 +2,50 @@ const express = require('express');
 const app = express();
 const stripe = require('stripe')(process.env.API_KEY);
 const axios = require('axios').default;
+const nodemailer = require('nodemailer');
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
 
 const YOUR_DOMAIN = 'https://fluidinova.webflow.io';
+
+app.post('/signup', (req, res) => {
+    // Process the signup data
+    const userData = req.body;
+
+    // Send email to project manager
+    sendEmailToProjectManager(userData);
+
+    res.status(200).send('Signup successful');
+});
+
+function sendEmailToProjectManager(userData) {
+    const transporter = nodemailer.createTransport({
+        host: 'smtp-mail.outlook.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'backend-provider@outlook.com',
+            pass: process.env.emailpass
+        }
+    });
+
+    const mailOptions = {
+        from: 'your-email@hotmail.com',
+        to: 'gon.skater@hotmail.com',
+        subject: 'New User Signup',
+        html: `<p>A new user has signed up:</p><p>Name: ${userData.name}</p><p>Email: ${userData.email}</p><p>Activity: ${userData.activity}</p><p>Type of application: ${userData.application}</p><p>Receive communications: ${userData.acceptcomm}</p>`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        } else {
+            console.log('Email sent:', info.response);
+        }
+    });
+}
 
 app.post('/validate-eori', async (req, res) => {
     const { eoris } = req.body;
@@ -71,6 +109,7 @@ app.post('/create-checkout-session', async (req, res) => {
             customer_email: customer.email,
             submit_type: 'auto',
             billing_address_collection: 'auto',
+            livemode: 'true',
             
             line_items: cartItems.map(item => ({
                 price: item.price,
