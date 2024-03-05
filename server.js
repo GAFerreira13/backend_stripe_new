@@ -32,7 +32,7 @@ function sendEmailToProjectManager(userData) {
     });
 
     const mailOptions = {
-        from: 'your-email@hotmail.com',
+        from: 'backend-provider@outlook.com',
         to: 'gon.skater@hotmail.com',
         subject: 'New User Signup',
         html: `<p>A new user has signed up:</p><p>Name: ${userData.name}</p><p>Email: ${userData.email}</p><p>Activity: ${userData.activity}</p><p>Type of application: ${userData.application}</p><p>Receive communications: ${userData.acceptcomm}</p>`
