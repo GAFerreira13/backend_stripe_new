@@ -8,8 +8,6 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-const YOUR_DOMAIN = 'https://fluidinova.webflow.io';
-
 app.post('/signup', (req, res) => {
     // Process the signup data
     const userData = req.body;
@@ -33,7 +31,7 @@ function sendEmailToProjectManager(userData) {
 
     const mailOptions = {
         from: 'backend-provider@outlook.com',
-        to: 'gon.skater@hotmail.com',
+        to: 'sales@fluidinova.com',
         subject: 'New User Signup',
         html: `<p>A new user has signed up:</p><p>Name: ${userData.name}</p><p>Email: ${userData.email}</p><p>Activity: ${userData.activity}</p><p>Type of application: ${userData.application}</p><p>Receive communications: ${userData.acceptcomm}</p>`
     };
