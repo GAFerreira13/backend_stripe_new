@@ -17,7 +17,7 @@ app.post('/signup', (req, res) => {
     // Send email to project manager
     sendEmailToProjectManager(userData);
 
-    res.status(200).send('Signup successful');
+    res.status(200).json({ message: "Signup successful" });
 });
 
 function sendEmailToProjectManager(userData) {
