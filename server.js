@@ -99,11 +99,11 @@ app.post('/contact', (req, res) => {
 
 function sendEmailToProjectManager(formfields) {
     const transporter = nodemailer.createTransport({
-        host: 'smtp-mail.outlook.com',
-        port: 587,
-        secure: false,
+        host: 'mail.fluidinova.pt',
+        port: 465,
+        secure: true,
         auth: {
-            user: 'backend-provider@outlook.com',
+            user: 'forms@fluidinova.pt',
             pass: process.env.emailpass
         }
     });
@@ -246,7 +246,6 @@ app.post('/create-checkout-session', async (req, res) => {
               automatic_tax: {
                 enabled: false
             },
-            billing_address_collection: 'required',
             customer_creation: 'always',
             tax_id_collection: {
                 enabled: true
