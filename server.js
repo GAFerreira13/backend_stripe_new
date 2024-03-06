@@ -19,7 +19,7 @@ app.post('/signup', (req, res) => {
 });
 
 function sendEmailToProjectManager(userData) {
-    const transporter = nodemailer.createTransport({
+    /*const transporter = nodemailer.createTransport({
         host: 'smtp-mail.outlook.com',
         port: 587,
         secure: false,
@@ -27,10 +27,19 @@ function sendEmailToProjectManager(userData) {
             user: 'backend-provider@outlook.com',
             pass: process.env.emailpass
         }
+    });*/
+    const transporter = nodemailer.createTransport({
+        host: 'plesk01.redicloud.pt',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'forms@fluidinova.pt',
+            pass: process.env.emailpass
+        }
     });
 
     const mailOptions = {
-        from: 'backend-provider@outlook.com',
+        from: 'forms@fluidinova.pt',
         to: 'sales@fluidinova.com',
         subject: 'New User Signup',
         //html: `<p><b>A new user has signed up</b></p><p><b>Name:</b> ${userData.name}</p><p><b>Email:</b> ${userData.email}</p><p><b>Activity:</b> ${userData.activity}</p><p><b>Type of application:</b> ${userData.application}</p><p><b>Receive communications:</b> ${userData.acceptcomm}</p>`
@@ -109,7 +118,7 @@ function sendEmailToProjectManager(formfields) {
     });
 
     const mailOptions = {
-        from: 'backend-provider@outlook.com',
+        from: 'forms@fluidinova.pt',
         to: ['sales@fluidinova.com', formfields.email],
         subject: 'nanoXIM Information Request',
         //html: `<p>${formfields.nameTitle} ${formfields.name}, thank you for your message! <br>We will contact you as soon as possible.<br><br><br><b>INFORMATION REQUEST SUMMARY</b></p></p><p><b>Activity:</b> ${formfields.activity}</p><p><b>Job:</b> ${formfields.job}</p><p><b>Company:</b> ${formfields.company}</p><p><b>Application:</b> ${formfields.application}</p><p><b>Country:</b> ${formfields.country}</p><p><b>E-mail:</b> ${formfields.email}</p><p><b>Phone number:</b> ${formfields.phone}</p><p><b>Item:</b> ${formfields.itemSelection}</p><p><b>Message:</b> ${formfields.message}</p><br>Best Regards,<br>FLUIDINOVA`
