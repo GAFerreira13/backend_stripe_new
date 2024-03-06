@@ -33,7 +33,7 @@ function sendEmailToProjectManager(userData) {
         from: 'backend-provider@outlook.com',
         to: 'sales@fluidinova.com',
         subject: 'New User Signup',
-        html: `<p>A new user has signed up:</p><p>Name: ${userData.name}</p><p>Email: ${userData.email}</p><p>Activity: ${userData.activity}</p><p>Type of application: ${userData.application}</p><p>Receive communications: ${userData.acceptcomm}</p>`
+        html: `<p><b>A new user has signed up</b></p><p><b>Name:</b> ${userData.name}</p><p><b>Email:</b> ${userData.email}</p><p><b>Activity:</b> ${userData.activity}</p><p><b>Type of application:</b> ${userData.application}</p><p><b>Receive communications:</b> ${userData.acceptcomm}</p>`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -44,6 +44,44 @@ function sendEmailToProjectManager(userData) {
         }
     });
 }
+
+app.post('/contact', (req, res) => {
+    // Process the signup data
+    const formfields = req.body;
+
+    // Send email to project manager
+    sendEmailToProjectManager(userData);
+
+    res.status(200).json({ message: "Contact notification successful" });
+});
+
+function sendEmailToProjectManager(formfields) {
+    const transporter = nodemailer.createTransport({
+        host: 'smtp-mail.outlook.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'backend-provider@outlook.com',
+            pass: process.env.emailpass
+        }
+    });
+
+    const mailOptions = {
+        from: 'backend-provider@outlook.com',
+        to: ['sales@fluidinova.com', formfields.email],
+        subject: 'nanoXIM Information Request',
+        html: `<p>${formfields.nameTitle} ${formfields.name}, thank you for your message. </p><p>We will contact you as soon as possible.</p><p>Best Regards, <p>FLUIDINOVA.</p></p><p><b>Activity:</b> ${formfields.activity}</p><p><b>Job</b> ${formfields.job}</p><p><b>Company:</b> ${formfields.company}</p><p><b>Application:</b> ${formfields.application}</p><p><b>Country:</b> ${formfields.country}</p><p><b>E-mail</b> ${formfields.email}</p><p><b>Phone number:</b> ${formfields.phone}</p><p><b>Item:</b> ${formfields.itemSelection}</p><p><b>Message:</b> ${formfields.message}</p>`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        } else {
+            console.log('Email sent:', info.response);
+        }
+    });
+}
+
 
 app.post('/validate-eori', async (req, res) => {
     const { eoris } = req.body;
