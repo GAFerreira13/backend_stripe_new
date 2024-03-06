@@ -50,7 +50,7 @@ app.post('/contact', (req, res) => {
     const formfields = req.body;
 
     // Send email to project manager
-    sendEmailToProjectManager(userData);
+    sendEmailToProjectManager(formfields);
 
     res.status(200).json({ message: "Contact notification successful" });
 });
