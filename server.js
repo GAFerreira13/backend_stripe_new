@@ -54,7 +54,7 @@ function sendSignupEmail(userData) {
                 body {
                     background-color: #ffffff;
                     font-family: 'DM Sans', sans-serif;
-                    color: #1a1a1a;
+                    color: #00416b;
                     padding: 20px;
                 }
                 .container {
@@ -69,7 +69,7 @@ function sendSignupEmail(userData) {
                     margin: 0 0 10px;
                 }
                 b {
-                    color: #007bff;
+                    color: #00416b;
                 }
             </style>
         </head>
@@ -133,7 +133,7 @@ function sendContactEmail(formfields) {
                 body {
                     background-color: #ffffff;
                     font-family: 'DM Sans', sans-serif;
-                    color: #1a1a1a;
+                    color: #00416b;
                 }
                 .container {
                     width: 700px;
