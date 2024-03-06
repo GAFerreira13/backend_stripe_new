@@ -33,7 +33,49 @@ function sendEmailToProjectManager(userData) {
         from: 'backend-provider@outlook.com',
         to: 'sales@fluidinova.com',
         subject: 'New User Signup',
-        html: `<p><b>A new user has signed up</b></p><p><b>Name:</b> ${userData.name}</p><p><b>Email:</b> ${userData.email}</p><p><b>Activity:</b> ${userData.activity}</p><p><b>Type of application:</b> ${userData.application}</p><p><b>Receive communications:</b> ${userData.acceptcomm}</p>`
+        //html: `<p><b>A new user has signed up</b></p><p><b>Name:</b> ${userData.name}</p><p><b>Email:</b> ${userData.email}</p><p><b>Activity:</b> ${userData.activity}</p><p><b>Type of application:</b> ${userData.application}</p><p><b>Receive communications:</b> ${userData.acceptcomm}</p>`
+        html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>New User Signup</title>
+            <style>
+                body {
+                    background-color: #ffffff;
+                    font-family: 'DM Sans', sans-serif;
+                    color: #1a1a1a;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #f0f0f0;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                p {
+                    margin: 0 0 10px;
+                }
+                b {
+                    color: #007bff;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <p><b>A new user has signed up</b></p>
+                <p><b>Name:</b> ${userData.name}</p>
+                <p><b>Email:</b> ${userData.email}</p>
+                <p><b>Activity:</b> ${userData.activity}</p>
+                <p><b>Type of application:</b> ${userData.application}</p>
+                <p><b>Receive communications:</b> ${userData.acceptcomm}</p>
+            </div>
+        </body>
+        </html>
+    `
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -70,7 +112,54 @@ function sendEmailToProjectManager(formfields) {
         from: 'backend-provider@outlook.com',
         to: ['sales@fluidinova.com', formfields.email],
         subject: 'nanoXIM Information Request',
-        html: `<p>${formfields.nameTitle} ${formfields.name}, thank you for your message! <br>We will contact you as soon as possible.<br><br><br><b>INFORMATION REQUEST SUMMARY</b></p></p><p><b>Activity:</b> ${formfields.activity}</p><p><b>Job:</b> ${formfields.job}</p><p><b>Company:</b> ${formfields.company}</p><p><b>Application:</b> ${formfields.application}</p><p><b>Country:</b> ${formfields.country}</p><p><b>E-mail:</b> ${formfields.email}</p><p><b>Phone number:</b> ${formfields.phone}</p><p><b>Item:</b> ${formfields.itemSelection}</p><p><b>Message:</b> ${formfields.message}</p><br>Best Regards,<br>FLUIDINOVA`
+        //html: `<p>${formfields.nameTitle} ${formfields.name}, thank you for your message! <br>We will contact you as soon as possible.<br><br><br><b>INFORMATION REQUEST SUMMARY</b></p></p><p><b>Activity:</b> ${formfields.activity}</p><p><b>Job:</b> ${formfields.job}</p><p><b>Company:</b> ${formfields.company}</p><p><b>Application:</b> ${formfields.application}</p><p><b>Country:</b> ${formfields.country}</p><p><b>E-mail:</b> ${formfields.email}</p><p><b>Phone number:</b> ${formfields.phone}</p><p><b>Item:</b> ${formfields.itemSelection}</p><p><b>Message:</b> ${formfields.message}</p><br>Best Regards,<br>FLUIDINOVA`
+        html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Information Request Summary</title>
+            <style>
+                body {
+                    background-color: #ffffff;
+                    font-family: 'DM Sans', sans-serif;
+                    color: #1a1a1a;
+                }
+                .container {
+                    width: 700px;
+                    margin: 0 auto;
+                    padding: 50px;
+                    background-color: #ffffff;
+                    border: 1px solid #cccccc;
+                    border-radius: 5px;
+                }
+
+                p {
+                    line-height: 25px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <p>${formfields.nameTitle} ${formfields.name}, thank you for your message! <br>We will contact you as soon as possible.</p>
+                <br>
+                <p><b>INFORMATION REQUEST SUMMARY</b></p>
+                <p><b>Activity:</b> ${formfields.activity}</p>
+                <p><b>Job:</b> ${formfields.job}</p>
+                <p><b>Company:</b> ${formfields.company}</p>
+                <p><b>Application:</b> ${formfields.application}</p>
+                <p><b>Country:</b> ${formfields.country}</p>
+                <p><b>E-mail:</b> ${formfields.email}</p>
+                <p><b>Phone number:</b> ${formfields.phone}</p>
+                <p><b>Item:</b> ${formfields.itemSelection}</p>
+                <p><b>Message:</b> ${formfields.message}</p>
+                <br>
+                <p>Best Regards,<br>FLUIDINOVA</p>
+            </div>
+        </body>
+        </html>
+    `
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
