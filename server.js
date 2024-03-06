@@ -240,8 +240,8 @@ app.post('/create-checkout-session', async (req, res) => {
                 tax_rates: [item.tax_rates]
             })),
               mode: 'payment',
-              success_url: 'https://fluidinova.webflow.io/success',
-              cancel_url: 'https://fluidinova.webflow.io/cancel',
+              success_url: 'https://fluidinova.webflow.io/',
+              cancel_url: 'https://fluidinova.webflow.io/check-out',
               allow_promotion_codes: true,
               automatic_tax: {
                 enabled: false
