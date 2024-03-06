@@ -13,12 +13,12 @@ app.post('/signup', (req, res) => {
     const userData = req.body;
 
     // Send email to project manager
-    sendEmailToProjectManager(userData);
+    sendSignupEmail(userData);
 
     res.status(200).json({ message: "Signup successful" });
 });
 
-function sendEmailToProjectManager(userData) {
+function sendSignupEmail(userData) {
     /*const transporter = nodemailer.createTransport({
         host: 'smtp-mail.outlook.com',
         port: 587,
@@ -101,12 +101,12 @@ app.post('/contact', (req, res) => {
     const formfields = req.body;
 
     // Send email to project manager
-    sendEmailToProjectManager(formfields);
+    sendContactEmail(formfields);
 
     res.status(200).json({ message: "Contact notification successful" });
 });
 
-function sendEmailToProjectManager(formfields) {
+function sendContactEmail(formfields) {
     const transporter = nodemailer.createTransport({
         host: 'plesk01.redicloud.pt',
         port: 465,
@@ -117,7 +117,7 @@ function sendEmailToProjectManager(formfields) {
         }
     });
 
-    const mailOptions = {
+    const mailOptions2 = {
         from: 'forms@fluidinova.pt',
         to: ['sales@fluidinova.com', formfields.email],
         subject: 'nanoXIM Information Request',
@@ -171,7 +171,7 @@ function sendEmailToProjectManager(formfields) {
     `
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions2, (error, info) => {
         if (error) {
             console.error('Error sending email:', error);
         } else {
