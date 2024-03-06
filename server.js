@@ -233,9 +233,7 @@ app.post('/create-checkout-session', async (req, res) => {
         const session = await stripe.checkout.sessions.create({
             customer_email: customer.email,
             submit_type: 'auto',
-            billing_address_collection: 'auto',
-            livemode: 'true',
-            
+            billing_address_collection: 'auto',            
             line_items: cartItems.map(item => ({
                 price: item.price,
                 quantity: item.quantity,
