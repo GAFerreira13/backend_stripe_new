@@ -99,9 +99,9 @@ app.post('/contact', (req, res) => {
 
 function sendEmailToProjectManager(formfields) {
     const transporter = nodemailer.createTransport({
-        host: 'mail.fluidinova.pt',
+        host: 'plesk01.redicloud.pt',
         port: 465,
-        secure: false,
+        secure: true,
         auth: {
             user: 'forms@fluidinova.pt',
             pass: process.env.emailpass
