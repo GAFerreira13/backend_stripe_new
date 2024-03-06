@@ -101,7 +101,7 @@ function sendEmailToProjectManager(formfields) {
     const transporter = nodemailer.createTransport({
         host: 'mail.fluidinova.pt',
         port: 465,
-        secure: true,
+        secure: false,
         auth: {
             user: 'forms@fluidinova.pt',
             pass: process.env.emailpass
