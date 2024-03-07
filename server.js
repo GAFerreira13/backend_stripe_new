@@ -224,7 +224,7 @@ app.get('/validate-vat/:vat_number', async (req, res) => {
         res.json(response.data);
         
     } catch (error) {
-        res.status(500).json({ error: 'A error occurred while validating VAT ' });
+        res.status(500).json({ error: 'A error  occurred while validating VAT ' });
         console.error('Error validating VAT number:', error);
     }
 });
