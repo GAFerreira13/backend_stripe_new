@@ -269,7 +269,7 @@ app.post('/create-checkout-session', async (req, res) => {
         
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while creating checkout session' });
-        console.error('Error creating checkout session:', error);
+        console.error('Error creating the checkout session:', error);
         res.redirect('https://fluidinova.webflow.io/cancel');
 
     }
