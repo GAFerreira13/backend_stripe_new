@@ -224,7 +224,7 @@ app.get('/validate-vat/:vat_number', async (req, res) => {
     }
 });
 
-function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid) {
+function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) {
     const transporter = nodemailer.createTransport({
         host: 'plesk01.redicloud.pt',
         port: 465,
@@ -239,7 +239,7 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid) {
         from: 'forms@fluidinova.pt',
         to: ['sales@fluidinova.com', customer.email],
 
-        subject: 'nanoXIM Order: ${orderid}',
+        subject: `nanoXIM Order: ${orderid}`,
         html: `
         <!DOCTYPE html>
         <html lang="en">
@@ -274,20 +274,21 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid) {
             <div class="container">
                 <p><b>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! Your Order ID is: ${orderid}</b></p>
                 <p><b>We will send you an e-mail as soon as the shipment has started. The details of your order are as follows:</b></p>
-                <p><b>Order ID:</b> ${orderid}</p>
+                <p><b><br>Order ID:</b> ${orderid}</p>
                 <p><b>Date:</b></p>
-                <p><b>Customer information:</b></p>
-                <p><b>Name:</b> ${customer.name}</p>
+                <p><b><br>CUSTOMER INFORMATION <br></b></p>
+                <p><b>Full name:</b> ${customer.name}</p>
+                <p><b>E-mail:</b> ${customer.email}</p>
+                <p><b>Phone number:</b> ${customer.phone}</p>
+                <p><b>VAT:</b> ${customer.taxID}</p> 
+                <p><b><br>SHIPPING INFORMATION <br></b></p>
                 <p><b>Street address:</b> ${shippingAddress.street1}</p>
                 <p> ${shippingAddress.street2}</p>
-                <p><b>ZIP code:</b> ${shippingAddress.zip}</p>
                 <p><b>City:</b> ${shippingAddress.city}</p>
                 <p><b>State:</b> ${shippingAddress.state}</p>
+                <p><b>ZIP code:</b> ${shippingAddress.zip}</p>
                 <p><b>Country:</b> ${shippingAddress.country}</p>
-                <p><b>Phone number:</b> ${customer.phone}</p>
-                <p><b>E-mail:</b> ${customer.email}</p>
-                <p><b>VAT:</b> ${customer.taxID}</p>
-                <p><b>Billing Information:</b></p>
+                <p><b><br>BILLING INFORMATION<br></b></p>
                 <p><b>First Name:</b> ${shippingAddress.city}</p>
                 <p><b>Last Name:</b> ${shippingAddress.city}</p>
                 <p><b>Billing address:</b> ${shippingAddress.city}</p>
@@ -295,7 +296,7 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid) {
                 <p><b>ZIP code:</b> ${shippingAddress.city}</p>
                 <p><b>State:</b> ${shippingAddress.city}</p>
                 <p><b>Country:</b> ${shippingAddress.city}</p>
-
+                <p><b><br>ADITIONAL INFORMATION:<br>${info}</b></p>
             </div>
         </body>
         </html>
@@ -313,7 +314,7 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid) {
 
 
 app.post('/create-checkout-session', async (req, res) => {
-    const { customer, shippingAddress, cartItems } = req.body;
+    const { customer, shippingAddress, cartItems, tx} = req.body;
 
     /*if (!amount || !currency || !productName || !productImage || !successUrl || !cancelUrl) {
         return res.status(400).json({ error: 'Missing required parameters' });
@@ -348,7 +349,7 @@ app.post('/create-checkout-session', async (req, res) => {
             });
  
         res.json({ url: session.url })
-        sendCheckoutEmail(customer, shippingAddress, cartItems, (count + process.env.year));
+        sendCheckoutEmail(customer, shippingAddress, cartItems, (count + process.env.year), tx);
         count++;
 
         
