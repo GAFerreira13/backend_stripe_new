@@ -224,7 +224,7 @@ app.get('/validate-vat/:vat_number', async (req, res) => {
     }
 });
 
-function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) {
+function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, orderid, info, b2c) {
     const transporter = nodemailer.createTransport({
         host: 'plesk01.redicloud.pt',
         port: 465,
@@ -273,7 +273,7 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) 
         </head>
         <body>
             <div class="container">
-                <p><b>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! Your Order ID is: ${orderid}</b></p>
+                <p><b>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </b></p>
                 <p><b>We will send you an e-mail as soon as the shipment has started. The details of your order are as follows:</b></p>
                 <p><b><br>Order ID:</b> ${orderid}</p>
                 <p><b>Date: ${datestr}</b></p>
@@ -281,6 +281,7 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) 
                 <p><b>Full name:</b> ${customer.name}</p>
                 <p><b>E-mail:</b> ${customer.email}</p>
                 <p><b>Phone number:</b> ${customer.phone}</p>
+                <p><b>Customer type:</b> ${b2c ? 'consumer' : 'business'}</p>
                 <p><b>VAT:</b> ${customer.taxID}</p> 
                 <p><b><br>SHIPPING ADDRESS <br></b></p>
                 <p><b>Street address:</b> ${shippingAddress.street1}</p>
@@ -289,7 +290,13 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) 
                 <p><b>State:</b> ${shippingAddress.state}</p>
                 <p><b>ZIP code:</b> ${shippingAddress.zip}</p>
                 <p><b>Country:</b> ${shippingAddress.country}</p>
-                
+                <p><b><br>BILLING ADDRESS <br></b></p>
+                <p><b>Street address:</b> ${billAddr.str1}</p>
+                <p> ${billAddr.str2}</p>
+                <p><b>City:</b> ${billAddr.c}</p>
+                <p><b>State:</b> ${billAddr.s}</p>
+                <p><b>ZIP code:</b> ${billAddr.z}</p>
+                <p><b>Country:</b> ${billAddr.ct}</p>
                 <p><b><br>ADITIONAL INFORMATION:<br>${info}</b></p>
             </div>
         </body>
