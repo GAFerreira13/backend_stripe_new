@@ -5,6 +5,8 @@ const axios = require('axios').default;
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 
+var count = 0;
+
 app.use(cors());
 app.use(express.json());
 
@@ -19,15 +21,6 @@ app.post('/signup', (req, res) => {
 });
 
 function sendSignupEmail(userData) {
-    /*const transporter = nodemailer.createTransport({
-        host: 'smtp-mail.outlook.com',
-        port: 587,
-        secure: false,
-        auth: {
-            user: 'backend-provider@outlook.com',
-            pass: process.env.emailpass
-        }
-    });*/
     const transporter = nodemailer.createTransport({
         host: 'plesk01.redicloud.pt',
         port: 465,
@@ -96,6 +89,7 @@ function sendSignupEmail(userData) {
         }
     });
 }
+
 
 app.post('/contact', (req, res) => {
     // Process the signup data
@@ -230,6 +224,93 @@ app.get('/validate-vat/:vat_number', async (req, res) => {
     }
 });
 
+function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid) {
+    const transporter = nodemailer.createTransport({
+        host: 'plesk01.redicloud.pt',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'forms@fluidinova.pt',
+            pass: process.env.emailpass
+        }
+    });
+
+    const mailOptions = {
+        from: 'forms@fluidinova.pt',
+        to: ['sales@fluidinova.com', customer.email],
+
+        subject: 'nanoXIM Order: ${orderid}',
+        html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>New User Signup</title>
+            <style>
+                body {
+                    background-color: #ffffff;
+                    font-family: 'DM Sans', sans-serif;
+                    color: #00416b;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #f0f0f0;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                p {
+                    margin: 0 0 10px;
+                }
+                b {
+                    color: #00416b;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <p><b>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! Your Order ID is: ${orderid}</b></p>
+                <p><b>We will send you an e-mail as soon as the shipment has started. The details of your order are as follows:</b></p>
+                <p><b>Order ID:</b> ${orderid}</p>
+                <p><b>Date:</b></p>
+                <p><b>Customer information:</b></p>
+                <p><b>Name:</b> ${customer.name}</p>
+                <p><b>Street address:</b> ${shippingAddress.street1}</p>
+                <p> ${shippingAddress.street2}</p>
+                <p><b>ZIP code:</b> ${shippingAddress.zip}</p>
+                <p><b>City:</b> ${shippingAddress.city}</p>
+                <p><b>State:</b> ${shippingAddress.state}</p>
+                <p><b>Country:</b> ${shippingAddress.country}</p>
+                <p><b>Phone number:</b> ${customer.phone}</p>
+                <p><b>E-mail:</b> ${customer.email}</p>
+                <p><b>VAT:</b> ${customer.taxID}</p>
+                <p><b>Billing Information:</b></p>
+                <p><b>First Name:</b> ${shippingAddress.city}</p>
+                <p><b>Last Name:</b> ${shippingAddress.city}</p>
+                <p><b>Billing address:</b> ${shippingAddress.city}</p>
+                <p> ${shippingAddress.city}</p>
+                <p><b>ZIP code:</b> ${shippingAddress.city}</p>
+                <p><b>State:</b> ${shippingAddress.city}</p>
+                <p><b>Country:</b> ${shippingAddress.city}</p>
+
+            </div>
+        </body>
+        </html>
+    `
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        } else {
+            console.log('Email sent:', info.response);
+        }
+    });
+}
+
 
 app.post('/create-checkout-session', async (req, res) => {
     const { customer, shippingAddress, cartItems } = req.body;
@@ -267,6 +348,9 @@ app.post('/create-checkout-session', async (req, res) => {
             });
  
         res.json({ url: session.url })
+        sendCheckoutEmail(customer, shippingAddress, cartItems, (count + process.env.year));
+        count++;
+
         
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while creating checkout session' });
