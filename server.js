@@ -234,7 +234,8 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) 
             pass: process.env.emailpass
         }
     });
-
+    const d = new Date();
+    let datestr = d.toString();
     const mailOptions = {
         from: 'forms@fluidinova.pt',
         to: ['sales@fluidinova.com', customer.email],
@@ -275,8 +276,8 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) 
                 <p><b>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! Your Order ID is: ${orderid}</b></p>
                 <p><b>We will send you an e-mail as soon as the shipment has started. The details of your order are as follows:</b></p>
                 <p><b><br>Order ID:</b> ${orderid}</p>
-                <p><b>Date:</b></p>
-                <p><b><br>CUSTOMER INFORMATION <br></b></p>
+                <p><b>Date: ${datestr}</b></p>
+                <p><b><br>BILLING INFORMATION <br></b></p>
                 <p><b>Full name:</b> ${customer.name}</p>
                 <p><b>E-mail:</b> ${customer.email}</p>
                 <p><b>Phone number:</b> ${customer.phone}</p>
@@ -288,14 +289,7 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) 
                 <p><b>State:</b> ${shippingAddress.state}</p>
                 <p><b>ZIP code:</b> ${shippingAddress.zip}</p>
                 <p><b>Country:</b> ${shippingAddress.country}</p>
-                <p><b><br>BILLING INFORMATION<br></b></p>
-                <p><b>First Name:</b> ${shippingAddress.city}</p>
-                <p><b>Last Name:</b> ${shippingAddress.city}</p>
-                <p><b>Billing address:</b> ${shippingAddress.city}</p>
-                <p> ${shippingAddress.city}</p>
-                <p><b>ZIP code:</b> ${shippingAddress.city}</p>
-                <p><b>State:</b> ${shippingAddress.city}</p>
-                <p><b>Country:</b> ${shippingAddress.city}</p>
+                
                 <p><b><br>ADITIONAL INFORMATION:<br>${info}</b></p>
             </div>
         </body>
