@@ -4,7 +4,7 @@ const stripe = require('stripe')(process.env.API_KEY);
 const axios = require('axios').default;
 const nodemailer = require('nodemailer');
 //const redis = require('redis');
-const client = redis.createClient();
+//const client = redis.createClient();
 const cors = require('cors');
 
 app.use(cors());
