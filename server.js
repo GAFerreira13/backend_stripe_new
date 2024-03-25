@@ -282,7 +282,7 @@ function sendCheckoutEmail(customer, shippingAddress, cartItems, orderid, info) 
                 <p><b>E-mail:</b> ${customer.email}</p>
                 <p><b>Phone number:</b> ${customer.phone}</p>
                 <p><b>VAT:</b> ${customer.taxID}</p> 
-                <p><b><br>SHIPPING INFORMATION <br></b></p>
+                <p><b><br>SHIPPING ADDRESS <br></b></p>
                 <p><b>Street address:</b> ${shippingAddress.street1}</p>
                 <p> ${shippingAddress.street2}</p>
                 <p><b>City:</b> ${shippingAddress.city}</p>
