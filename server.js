@@ -297,7 +297,8 @@ function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, order
         <body>
             <div class="container">
                 <p><b>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </b></p>
-                <p><b>We will send you an e-mail as soon as the shipment has started. The details of your order are as follows:</b></p>
+                <p><b>This e-mail serves to inform you that an order has been placed. Once the payment is complete, we will proceed to dispatch your goods.<br> 
+                Then, we will send you an e-mail as soon as the shipment has started. The details of your order are as follows:</b></p>
                 <p><b><br>Order ID:</b> ${orderid}</p>
                 <p><b>Date: ${datestr}</b></p>
                 <p><b><br>BILLING INFORMATION <br></b></p>
@@ -359,8 +360,8 @@ app.post('/create-checkout-session', async (req, res) => {
                 tax_rates: [item.tax_rates]
             })),
               mode: 'payment',
-              success_url: 'https://fluidinova.webflow.io/',
-              cancel_url: 'https://fluidinova.webflow.io/check-out',
+              success_url: 'https://fluidinova.webflow.io/success',
+              cancel_url: 'https://fluidinova.webflow.io/cancel',
               allow_promotion_codes: true,
               automatic_tax: {
                 enabled: false
