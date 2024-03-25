@@ -3,16 +3,16 @@ const app = express();
 const stripe = require('stripe')(process.env.API_KEY);
 const axios = require('axios').default;
 const nodemailer = require('nodemailer');
-const redis = require('redis');
+//const redis = require('redis');
 const client = redis.createClient();
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
 
-client.set('count', 1, redis.print);
+//client.set('count', 1, redis.print);
 
-app.post('/increment', (req, res) => {
+/*app.post('/increment', (req, res) => {
     client.incr('count', (err, newCount) => {
         if (err) {
             console.error('Error incrementing count:', err);
@@ -31,7 +31,7 @@ app.get('/count', (req, res) => {
         }
         res.status(200).json({ count: count || 0 });
     });
-});
+});*/
 
 app.post('/signup', (req, res) => {
     // Process the signup data
@@ -373,13 +373,14 @@ app.post('/create-checkout-session', async (req, res) => {
             });
  
         res.json({ url: session.url })
-        client.get('count', (err, value) => {
+        sendCheckoutEmail(customer, shpAd, bilAd, cartItems, process.env.year, tx, b2c);
+
+        /*client.get('count', (err, value) => {
             if (err) {
                 console.error('Error getting count:', err);
                 // Handle the error
             } else {
                 console.log('Value of count:', value);
-                sendCheckoutEmail(customer, shpAd, bilAd, cartItems, (value + process.env.year), tx, b2c);
             }
         });
         client.incr('count', (err, newValue) => {
@@ -390,7 +391,7 @@ app.post('/create-checkout-session', async (req, res) => {
                 console.log('New value of count:', newValue);
                 // Use the new value as needed
             }
-        });
+        });*/
         
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while creating checkout session' });
