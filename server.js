@@ -367,7 +367,7 @@ app.post('/create-checkout-session', async (req, res) => {
             },
             customer_creation: 'always',
             tax_id_collection: {
-                enabled: true
+                enabled: false
             }
               
             });
