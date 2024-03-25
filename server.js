@@ -304,15 +304,15 @@ function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, order
                 <p><b>Full name:</b> ${customer.name}</p>
                 <p><b>E-mail:</b> ${customer.email}</p>
                 <p><b>Phone number:</b> ${customer.phone}</p>
-                <p><b>Customer type:</b> ${b2c ? 'consumer' : 'business'}</p>
+                <p><b>Customer type:</b> ${b2c ? 'Consumer' : 'Business'}</p>
                 <p><b>VAT:</b> ${customer.taxID}</p> 
                 <p><b><br>SHIPPING ADDRESS <br></b></p>
-                <p><b>Street address:</b> ${shippingAddress.street1}</p>
-                <p> ${shippingAddress.street2}</p>
-                <p><b>City:</b> ${shippingAddress.city}</p>
-                <p><b>State:</b> ${shippingAddress.state}</p>
-                <p><b>ZIP code:</b> ${shippingAddress.zip}</p>
-                <p><b>Country:</b> ${shippingAddress.country}</p>
+                <p><b>Street address:</b> ${shippingAddress.str1}</p>
+                <p> ${shippingAddress.str2}</p>
+                <p><b>City:</b> ${shippingAddress.c}</p>
+                <p><b>State:</b> ${shippingAddress.s}</p>
+                <p><b>ZIP code:</b> ${shippingAddress.z}</p>
+                <p><b>Country:</b> ${shippingAddress.ct}</p>
                 <p><b><br>BILLING ADDRESS <br></b></p>
                 <p><b>Street address:</b> ${billAddr.str1}</p>
                 <p> ${billAddr.str2}</p>
