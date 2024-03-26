@@ -292,7 +292,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
           <td>
             ${item.name}<br>
             Weight: ${item.weight}<br>
-            Unit price: €${item.price_num}
+            Unit price: €${(item.price_num).toFixed(2)}
           </td>
           <td>${item.quantity}</td>
           <td>${total}</td>
