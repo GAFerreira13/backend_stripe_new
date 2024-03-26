@@ -377,28 +377,28 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <p>Once payment has been made, we will send you an e-mail as soon as shipping has begun.
                 The details of your order are as follows:</p>
                 <b>Date: </b>${datestr}
-                <p><b><br>BILLING INFORMATION <br></b></p>
-                <b>Full name:</b> ${customer.name}
-                <b>E-mail:</b> ${customer.email}
-                <b>Phone number:</b> ${customer.phone}
-                <b>Customer type:</b> ${b2c ? 'Consumer' : 'Business'}
-                <b>VAT:</b> ${customer.taxID}
-                <p><b><br>SHIPPING ADDRESS <br></b></p>
-                <b>Street address:</b> ${shippingAddress.str1}
-                ${shippingAddress.str2}
-                <b>City:</b> ${shippingAddress.c}
-                <b>State:</b> ${shippingAddress.s}
-                <b>ZIP code:</b> ${shippingAddress.z}
-                <b>Country:</b> ${shippingAddress.ct}
-                <p><b><br>BILLING ADDRESS <br></b></p>
-                <b>Street address:</b> ${billAddr.str1}
-                 ${billAddr.str2}
-                <b>City:</b> ${billAddr.c}
-                <b>State:</b> ${billAddr.s}
-                <b>ZIP code:</b> ${billAddr.z}
-                <b>Country:</b> ${billAddr.ct}
-                <p><b><br>ORDER SUMMARY</b></p><br>
-                ${orderSummaryHTML} <!-- Include the order summary table here -->
+                <p><b><br><br>BILLING INFORMATION <br></b></p>
+                <b>Full name:</b> ${customer.name}<br>
+                <b>E-mail:</b> ${customer.email}<br>
+                <b>Phone number:</b> ${customer.phone}<br>
+                <b>Customer type:</b> ${b2c ? 'Consumer' : 'Business'}<br>
+                <b>VAT:</b> ${customer.taxID}<br>
+                <p><b><br><br>SHIPPING ADDRESS <br></b></p>
+                <b>Street address:</b> ${shippingAddress.str1}<br>
+                ${shippingAddress.str2}<br>
+                <b>City:</b> ${shippingAddress.c}<br>
+                <b>State:</b> ${shippingAddress.s}<br>
+                <b>ZIP code:</b> ${shippingAddress.z}<br>
+                <b>Country:</b> ${shippingAddress.ct}<br>
+                <p><b><br><br>BILLING ADDRESS <br></b></p>
+                <b>Street address:</b> ${billAddr.str1}<br>
+                 ${billAddr.str2}<br>
+                <b>City:</b> ${billAddr.c}<br>
+                <b>State:</b> ${billAddr.s}<br>
+                <b>ZIP code:</b> ${billAddr.z}<br>
+                <b>Country:</b> ${billAddr.ct}<br>
+                <p><b><br><br>ORDER SUMMARY</b></p><br>
+                ${orderSummaryHTML} <br>
                 <p><b><br>ADITIONAL INFORMATION</b></p><br>${info}
 
 
@@ -417,27 +417,23 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     });
 }
 
+/*shipping_address_collection: {
+                allowed_countries: ['AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BE', 'BZ', 'BJ', 'BM', 'BT', 'BO', 'BQ', 'BA', 'BW', 'BR', 'IO', 'VG', 'BN', 'BG', 'BF', 'BI', 'CV', 'KH', 'CM', 'CA', 'KY', 'TD', 'CL', 'CN', 'CX', 'CC', 'CO', 'CK', 'CR', 'HR', 'CW', 'CY', 'CZ', 'CD', 'DK', 'DJ', 'DM', 'DO', 'EC', 'EG', 'SV', 'ER', 'EE', 'SZ', 'ET', 'FO', 'FJ', 'FI', 'FR', 'GF', 'PF', 'TF', 'GA', 'GM', 'GE', 'DE', 'GH', 'PI', 'GR', 'GL', 'GD', 'GP', 'GU', 'GT', 'GG', 'GY', 'HT', 'HN', 'HK', 'HU', 'IS', 'IN', 'ID', 'DQ', 'IE', 'IM', 'IL', 'IT', 'CI', 'JM', 'JP', 'JE', 'JO', 'KZ', 'KE', 'XK', 'KW', 'KG', 'LA', 'LV', 'LB', 'LS', 'LR', 'LY', 'LI', 'LT', 'LU', 'MO', 'MG', 'MW', 'MY', 'MV', 'ML', 'MT', 'MH', 'MQ', 'MR', 'MU', 'MX', 'FM', 'MD', 'MC', 'MN', 'ME', 'MS', 'MA', 'MZ', 'NA', 'NP', 'NL', 'NC', 'NZ', 'NI', 'NE', 'NG', 'NF', 'MK', 'MP', 'NO', 'OM', 'PK', 'PW', 'PS', 'PA', 'PG', 'PY', 'PE', 'PH', 'PN', 'PL', 'PT', 'PR', 'QA', 'CG', 'RE', 'RO', 'RW', 'BL', 'KN', 'LC', 'MF', 'VC', 'WS', 'SM', 'SA', 'SN', 'RS', 'SC', 'SG', 'SX', 'SK', 'SI', 'ZA', 'GS', 'KR', 'SS', 'ES', 'LK', 'SR', 'SJ', 'SE', 'CH', 'TQ', 'TZ', 'TH', 'TL', 'TG', 'TO', 'TT', 'TN', 'TR', 'TM', 'TC', 'VI', 'UG', 'AE', 'GB', 'US', 'UM', 'UY', 'UZ', 'VU', 'VA', 'VE', 'VN', 'WF', 'EH', 'ZM', 'ZW'],
+              },*/
 
 app.post('/create-checkout-session', async (req, res) => {
     const { customer, shpAd, bilAd, cartItems, tx, b2c} = req.body;
-
-    /*if (!amount || !currency || !productName || !productImage || !successUrl || !cancelUrl) {
-        return res.status(400).json({ error: 'Missing required parameters' });
-    }*/
-
 
     try {
         const session = await stripe.checkout.sessions.create({
             customer_email: customer.email,
             submit_type: 'auto',
             billing_address_collection: 'auto',
-            /*shipping_address_collection: {
-                allowed_countries: ['AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BE', 'BZ', 'BJ', 'BM', 'BT', 'BO', 'BQ', 'BA', 'BW', 'BR', 'IO', 'VG', 'BN', 'BG', 'BF', 'BI', 'CV', 'KH', 'CM', 'CA', 'KY', 'TD', 'CL', 'CN', 'CX', 'CC', 'CO', 'CK', 'CR', 'HR', 'CW', 'CY', 'CZ', 'CD', 'DK', 'DJ', 'DM', 'DO', 'EC', 'EG', 'SV', 'ER', 'EE', 'SZ', 'ET', 'FO', 'FJ', 'FI', 'FR', 'GF', 'PF', 'TF', 'GA', 'GM', 'GE', 'DE', 'GH', 'PI', 'GR', 'GL', 'GD', 'GP', 'GU', 'GT', 'GG', 'GY', 'HT', 'HN', 'HK', 'HU', 'IS', 'IN', 'ID', 'DQ', 'IE', 'IM', 'IL', 'IT', 'CI', 'JM', 'JP', 'JE', 'JO', 'KZ', 'KE', 'XK', 'KW', 'KG', 'LA', 'LV', 'LB', 'LS', 'LR', 'LY', 'LI', 'LT', 'LU', 'MO', 'MG', 'MW', 'MY', 'MV', 'ML', 'MT', 'MH', 'MQ', 'MR', 'MU', 'MX', 'FM', 'MD', 'MC', 'MN', 'ME', 'MS', 'MA', 'MZ', 'NA', 'NP', 'NL', 'NC', 'NZ', 'NI', 'NE', 'NG', 'NF', 'MK', 'MP', 'NO', 'OM', 'PK', 'PW', 'PS', 'PA', 'PG', 'PY', 'PE', 'PH', 'PN', 'PL', 'PT', 'PR', 'QA', 'CG', 'RE', 'RO', 'RW', 'BL', 'KN', 'LC', 'MF', 'VC', 'WS', 'SM', 'SA', 'SN', 'RS', 'SC', 'SG', 'SX', 'SK', 'SI', 'ZA', 'GS', 'KR', 'SS', 'ES', 'LK', 'SR', 'SJ', 'SE', 'CH', 'TQ', 'TZ', 'TH', 'TL', 'TG', 'TO', 'TT', 'TN', 'TR', 'TM', 'TC', 'VI', 'UG', 'AE', 'GB', 'US', 'UM', 'UY', 'UZ', 'VU', 'VA', 'VE', 'VN', 'WF', 'EH', 'ZM', 'ZW'],
-              },*/
+            
             line_items: cartItems.map(item => ({
                 price: item.price,
                 quantity: item.quantity,
-                tax_rates: [item.tax_rates]
+                tax_rates: item.tax_rates
             })),
               mode: 'payment',
               success_url: 'https://fluidinova.webflow.io/success',
@@ -456,23 +452,6 @@ app.post('/create-checkout-session', async (req, res) => {
         res.json({ url: session.url })
         sendCheckoutEmail(customer, shpAd, bilAd, cartItems, process.env.year, tx, b2c);
 
-        /*client.get('count', (err, value) => {
-            if (err) {
-                console.error('Error getting count:', err);
-                // Handle the error
-            } else {
-                console.log('Value of count:', value);
-            }
-        });
-        client.incr('count', (err, newValue) => {
-            if (err) {
-                console.error('Error incrementing count:', err);
-                // Handle the error
-            } else {
-                console.log('New value of count:', newValue);
-                // Use the new value as needed
-            }
-        });*/
         
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while creating checkout session' });
