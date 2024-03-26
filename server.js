@@ -403,7 +403,9 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                     color: #00416b;
                 }
                 th {
-                    background-color: #f2f2f2; /* Add background color to header cells */
+                    background-color: #00416b; /* Add background color to header cells */
+                    font-family: 'DM Sans', sans-serif;
+                    color: #ffffff;
                 }
                 
             </style>
