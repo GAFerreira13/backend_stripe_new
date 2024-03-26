@@ -278,7 +278,9 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     // Iterate through each item in the cart
     cartItems.forEach(item => {
       // Calculate total for the item
-      let total = (item.tax_rates === "") ? (item.price_num * item.quantity) : (item.price_num * item.quantity * 1.23);
+        let total = (item.tax_rates === "") ? (item.price_num * item.quantity) : (item.price_num * item.quantity * 1.23);
+        //let total = item.price_num * item.quantity;
+
       total = `€${total.toFixed(2)}`;
   
       // Construct table row for the item
@@ -330,7 +332,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
   
   // Calculate subtotal
   const subtotal = cartItems.reduce((acc, item) => {
-    return acc + (item.tax_rates === "" ? item.price_num * item.quantity : item.price_num * item.quantity * 1.23);
+    return acc + item.price_num * item.quantity;
   }, 0);
   
   console.log("Cart Items:", cartItems); // Add this line to log cartItems
@@ -391,27 +393,27 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <p>Once payment has been made, we will send you an e-mail as soon as shipping has begun.
                 The details of your order are as follows:</p>
                 <b>Date: </b>${datestr}
-                <p><b><br><br>BILLING INFORMATION <br></b></p>
+                <p><b><br>BILLING INFORMATION <br></b></p>
                 <b>Full name:</b> ${customer.name}<br>
                 <b>E-mail:</b> ${customer.email}<br>
                 <b>Phone number:</b> ${customer.phone}<br>
                 <b>Customer type:</b> ${b2c ? 'Consumer' : 'Business'}<br>
                 <b>VAT:</b> ${customer.taxID}<br>
-                <p><b><br><br>SHIPPING ADDRESS <br></b></p>
+                <p><b><br>SHIPPING ADDRESS <br></b></p>
                 <b>Street address:</b> ${shippingAddress.str1}<br>
                 <b>Street address 2:</b>${shippingAddress.str2}<br>
                 <b>City:</b> ${shippingAddress.c}<br>
                 <b>State:</b> ${shippingAddress.s}<br>
                 <b>ZIP code:</b> ${shippingAddress.z}<br>
                 <b>Country:</b> ${shippingAddress.ct}<br>
-                <p><b><br><br>BILLING ADDRESS <br></b></p>
+                <p><b><br>BILLING ADDRESS <br></b></p>
                 <b>Street address:</b> ${billAddr.str1}<br>
                 <b>Street address 2:</b> ${billAddr.str2}<br>
                 <b>City:</b> ${billAddr.c}<br>
                 <b>State:</b> ${billAddr.s}<br>
                 <b>ZIP code:</b> ${billAddr.z}<br>
                 <b>Country:</b> ${billAddr.ct}<br>
-                <p><b><br><br>ORDER SUMMARY</b></p><br>
+                <p><b><br>ORDER SUMMARY</b></p><br>
                 ${orderSummaryHTML} <br>
                 <p><b><br>ADITIONAL INFORMATION</b></p>${info}
 
