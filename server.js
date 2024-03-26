@@ -304,14 +304,14 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     html += `
         <tr>
           <td colspan="2"><strong>Subtotal</strong></td>
-          <td><strong>€${subtotal.toFixed(2)}</strong></td>
+          <td>€${subtotal.toFixed(2)}</td>
         </tr>
     `;
     //VAT row
     html += `
         <tr>
           <td colspan="2"><strong>VAT (23%)</strong></td>
-          <td><strong>€${taxed ? (subtotal*0.23).toFixed(2) : "0"}</strong></td>
+          <td>€${taxed ? (subtotal*0.23).toFixed(2) : "0"}</td>
         </tr>
     `;
   
@@ -319,7 +319,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     html += `
         <tr>
           <td colspan="2"><strong>Shipping</strong></td>
-          <td><strong>€0.00</strong></td>
+          <td>€0.00</td>
         </tr>
     `;
   
