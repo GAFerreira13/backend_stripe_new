@@ -366,7 +366,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 body {
                     background-color: #ffffff;
                     font-family: 'DM Sans', sans-serif;
-                    color: #00416b;
+                    color: #ffffff;
                     padding: 20px;
                 }
                 .container {
@@ -380,7 +380,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 .logo {
                     display: block;
                     margin: 0 auto 40px; /* 40px margin bottom */
-                    max-width: 100%;
+                    max-width: 30%;
                     height: auto;
                 }
                 p {
