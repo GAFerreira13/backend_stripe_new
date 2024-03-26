@@ -395,8 +395,8 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
             </style>
         </head>
         <body>
-        <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/6570b0322488f32b8e6aab10_logo-1.svg" alt="Company Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
             <div class="container">
+            <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/6570b0322488f32b8e6aab10_logo-1.svg" alt="Company Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
                 <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </p>
                 <p>Once payment has been made, we will send you an e-mail as soon as shipping has begun.
                 The details of your order are as follows:</p>
