@@ -55,7 +55,7 @@ function sendSignupEmail(userData) {
     });
 
     const mailOptions = {
-        from: 'FLUIDINOVA',
+        from: 'FLUIDINOVA <forms@fluidinova.pt>',
         to: 'sales@fluidinova.com',
 
         subject: 'New User Signup',
@@ -136,7 +136,7 @@ function sendContactEmail(formfields) {
     });
 
     const mailOptions2 = {
-        from: 'FLUIDINOVA',
+        from: 'FLUIDINOVA <forms@fluidinova.pt>',
         to: ['sales@fluidinova.com', formfields.email],
         subject: 'nanoXIM Information Request',
         //html: `<p>${formfields.nameTitle} ${formfields.name}, thank you for your message! <br>We will contact you as soon as possible.<br><br><br><b>INFORMATION REQUEST SUMMARY</b></p></p><p><b>Activity:</b> ${formfields.activity}</p><p><b>Job:</b> ${formfields.job}</p><p><b>Company:</b> ${formfields.company}</p><p><b>Application:</b> ${formfields.application}</p><p><b>Country:</b> ${formfields.country}</p><p><b>E-mail:</b> ${formfields.email}</p><p><b>Phone number:</b> ${formfields.phone}</p><p><b>Item:</b> ${formfields.itemSelection}</p><p><b>Message:</b> ${formfields.message}</p><br>Best Regards,<br>FLUIDINOVA`
@@ -351,7 +351,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
   const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
     
     const mailOptions = {
-        from: 'FLUIDINOVA',
+        from: 'FLUIDINOVA <forms@fluidinova.pt>',
         to: ['sales@fluidinova.com', customer.email],
 
         subject: `Your nanoXIM Order`,
