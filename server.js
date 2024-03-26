@@ -470,8 +470,8 @@ app.post('/create-checkout-session', async (req, res) => {
                 tax_rates: [item.tax_rates]
             })),
               mode: 'payment',
-              success_url: 'https://fluidinova.webflow.io/success',
-              cancel_url: 'https://fluidinova.webflow.io/cancel',
+              success_url: 'https://www.fluidinova.com/success',
+              cancel_url: 'https://www.fluidinova.com/cancel',
               allow_promotion_codes: true,
               automatic_tax: {
                 enabled: false
@@ -490,7 +490,7 @@ app.post('/create-checkout-session', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while creating checkout session' });
         console.error('Error creating the checkout session:', error);
-        res.redirect('https://fluidinova.webflow.io/cancel');
+        res.redirect('https://www.fluidinova.com/cancel');
 
     }
 });
