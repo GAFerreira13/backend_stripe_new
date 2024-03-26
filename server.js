@@ -307,6 +307,13 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
           <td><strong>€${subtotal.toFixed(2)}</strong></td>
         </tr>
     `;
+    //VAT row
+    html += `
+        <tr>
+          <td colspan="2"><strong>VAT (23%)</strong></td>
+          <td><strong>€${taxed ? (subtotal*0.23).toFixed(2) : "0"}</strong></td>
+        </tr>
+    `;
   
     // Add free shipping row
     html += `
@@ -399,7 +406,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         </head>
         <body>
             <div class="container">
-            <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/6570b0322488f32b8e6aab10_logo-1.svg" alt="Company Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+            <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/6570b0322488f32b8e6aab10_logo-1.svg" alt="Company Logo">
                 <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </p>
                 <p>Once payment has been made and shipping has begun, we will send you an e-mail with shipping information.
                 The details of your order are as follows:</p>
