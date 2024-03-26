@@ -367,6 +367,12 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                     border-radius: 5px;
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 }
+                .logo {
+                    display: block;
+                    margin: 0 auto 40px; /* 40px margin bottom */
+                    max-width: 100%;
+                    height: auto;
+                }
                 p {
                     margin: 0 0 10px;
                 }
@@ -385,10 +391,11 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 th {
                     background-color: #f2f2f2; /* Add background color to header cells */
                 }
+                
             </style>
         </head>
         <body>
-        <img src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/6570b0322488f32b8e6aab10_logo-1.svg" alt="Company Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+        <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/6570b0322488f32b8e6aab10_logo-1.svg" alt="Company Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
             <div class="container">
                 <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </p>
                 <p>Once payment has been made, we will send you an e-mail as soon as shipping has begun.
