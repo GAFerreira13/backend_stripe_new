@@ -366,7 +366,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 body {
                     background-color: #ffffff;
                     font-family: 'DM Sans', sans-serif;
-                    color: #ffffff;
+                    color: #00416b;
                     padding: 20px;
                 }
                 .container {
@@ -392,11 +392,15 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 table {
                     width: 100%;
                     border-collapse: collapse;
+                    font-family: 'DM Sans', sans-serif;
+                    color: #00416b;
                 }
                 th, td {
                     border: 1px solid #ddd; /* Add borders to cells */
                     padding: 8px;
                     text-align: left;
+                    font-family: 'DM Sans', sans-serif;
+                    color: #00416b;
                 }
                 th {
                     background-color: #f2f2f2; /* Add background color to header cells */
