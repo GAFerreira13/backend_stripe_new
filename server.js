@@ -285,9 +285,9 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
       html += `
         <tr>
           <td>
-            <p>${item.name}</p>
-            <p>Weight: ${item.weight}</p>
-            <p>Unit price: €${item.price_num}</p>
+            ${item.name}
+            Weight: ${item.weight}
+            Unit price: €${item.price_num}
           </td>
           <td>${item.quantity}</td>
           <td>${total}</td>
@@ -349,7 +349,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>New User Signup</title>
+            <title>Checkout</title>
             <style>
                 body {
                     background-color: #ffffff;
@@ -370,6 +370,18 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 }
                 b {
                     color: #00416b;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid #ddd; /* Add borders to cells */
+                    padding: 8px;
+                    text-align: left;
+                }
+                th {
+                    background-color: #f2f2f2; /* Add background color to header cells */
                 }
             </style>
         </head>
