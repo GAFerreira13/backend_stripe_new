@@ -263,7 +263,7 @@ function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, order
         from: 'forms@fluidinova.pt',
         to: ['sales@fluidinova.com', customer.email],
 
-        subject: `nanoXIM Order: ${orderid}`,
+        subject: `Your nanoXIM Order`,
         html: `
         <!DOCTYPE html>
         <html lang="en">
@@ -297,9 +297,8 @@ function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, order
         <body>
             <div class="container">
                 <p><b>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </b></p>
-                <p><b>This e-mail serves to inform you that an order has been placed. Once the payment is complete, we will proceed to dispatch your goods.<br> 
-                Then, we will send you an e-mail as soon as the shipment has started. The details of your order are as follows:</b></p>
-                <p><b><br>Order ID:</b> ${orderid}</p>
+                <p><b>Once payment has been made, we will send you an e-mail as soon as shipping has begun.
+                The details of your order are as follows:</b></p>
                 <p><b>Date: ${datestr}</b></p>
                 <p><b><br>BILLING INFORMATION <br></b></p>
                 <p><b>Full name:</b> ${customer.name}</p>
