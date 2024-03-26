@@ -333,6 +333,8 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     return acc + (item.tax_rates === "" ? item.price_num * item.quantity : item.price_num * item.quantity * 1.23);
   }, 0);
   
+  console.log("Cart Items:", cartItems); // Add this line to log cartItems
+
   // Generate order summary HTML
   const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
     
@@ -399,7 +401,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <b>Country:</b> ${billAddr.ct}<br>
                 <p><b><br><br>ORDER SUMMARY</b></p><br>
                 ${orderSummaryHTML} <br>
-                <p><b><br>ADITIONAL INFORMATION</b></p><br>${info}
+                <p><b><br>ADITIONAL INFORMATION</b></p>${info}
 
 
             </div>
