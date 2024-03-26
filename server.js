@@ -259,6 +259,83 @@ function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, order
     });
     const d = new Date();
     let datestr = d.toString();
+
+// Constructing the HTML content for the email
+const generateOrderSummaryHTML = (cartItems, subtotal) => {
+    // Create table header
+    let html = `
+      <table>
+        <thead>
+          <tr>
+            <th><strong>Item</strong></th>
+            <th><strong>Quantity</strong></th>
+            <th><strong>Total</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+  
+    // Iterate through each item in the cart
+    cartItems.forEach(item => {
+      // Calculate total for the item
+      let total = (item.tax_rates === "") ? (item.price_num * item.quantity) : (item.price_num * item.quantity * 1.23);
+      total = `€${total.toFixed(2)}`;
+  
+      // Construct table row for the item
+      html += `
+        <tr>
+          <td>
+            <p>${item.name}</p>
+            <p>Weight: ${item.weight}</p>
+            <p>Unit price: €${item.price_num}</p>
+          </td>
+          <td>${item.quantity}</td>
+          <td>${total}</td>
+        </tr>
+      `;
+    });
+  
+    // Add subtotal row
+    html += `
+        <tr>
+          <td colspan="2"><strong>Subtotal</strong></td>
+          <td><strong>€${subtotal.toFixed(2)}</strong></td>
+        </tr>
+    `;
+  
+    // Add free shipping row
+    html += `
+        <tr>
+          <td colspan="2"><strong>Free shipping</strong></td>
+          <td><strong>€0.00</strong></td>
+        </tr>
+    `;
+  
+    // Add total row
+    html += `
+        <tr>
+          <td colspan="2"><strong>Total</strong></td>
+          <td><strong>€${(subtotal).toFixed(2)}</strong></td>
+        </tr>
+    `;
+  
+    // Close table and return the HTML content
+    html += `
+        </tbody>
+      </table>
+    `;
+  
+    return html;
+  };
+  
+  // Calculate subtotal
+  const subtotal = cartItems.reduce((acc, item) => {
+    return acc + (item.tax_rates === "" ? item.price_num * item.quantity : item.price_num * item.quantity * 1.23);
+  }, 0);
+  
+  // Generate order summary HTML
+  const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
+    
     const mailOptions = {
         from: 'forms@fluidinova.pt',
         to: ['sales@fluidinova.com', customer.email],
@@ -296,31 +373,35 @@ function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, order
         </head>
         <body>
             <div class="container">
-                <p><b>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </b></p>
-                <p><b>Once payment has been made, we will send you an e-mail as soon as shipping has begun.
-                The details of your order are as follows:</b></p>
-                <p><b>Date: ${datestr}</b></p>
+                <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </p>
+                <p>Once payment has been made, we will send you an e-mail as soon as shipping has begun.
+                The details of your order are as follows:</p>
+                <b>Date: </b>${datestr}
                 <p><b><br>BILLING INFORMATION <br></b></p>
-                <p><b>Full name:</b> ${customer.name}</p>
-                <p><b>E-mail:</b> ${customer.email}</p>
-                <p><b>Phone number:</b> ${customer.phone}</p>
-                <p><b>Customer type:</b> ${b2c ? 'Consumer' : 'Business'}</p>
-                <p><b>VAT:</b> ${customer.taxID}</p> 
+                <b>Full name:</b> ${customer.name}
+                <b>E-mail:</b> ${customer.email}
+                <b>Phone number:</b> ${customer.phone}
+                <b>Customer type:</b> ${b2c ? 'Consumer' : 'Business'}
+                <b>VAT:</b> ${customer.taxID}
                 <p><b><br>SHIPPING ADDRESS <br></b></p>
-                <p><b>Street address:</b> ${shippingAddress.str1}</p>
-                <p> ${shippingAddress.str2}</p>
-                <p><b>City:</b> ${shippingAddress.c}</p>
-                <p><b>State:</b> ${shippingAddress.s}</p>
-                <p><b>ZIP code:</b> ${shippingAddress.z}</p>
-                <p><b>Country:</b> ${shippingAddress.ct}</p>
+                <b>Street address:</b> ${shippingAddress.str1}
+                ${shippingAddress.str2}
+                <b>City:</b> ${shippingAddress.c}
+                <b>State:</b> ${shippingAddress.s}
+                <b>ZIP code:</b> ${shippingAddress.z}
+                <b>Country:</b> ${shippingAddress.ct}
                 <p><b><br>BILLING ADDRESS <br></b></p>
-                <p><b>Street address:</b> ${billAddr.str1}</p>
-                <p> ${billAddr.str2}</p>
-                <p><b>City:</b> ${billAddr.c}</p>
-                <p><b>State:</b> ${billAddr.s}</p>
-                <p><b>ZIP code:</b> ${billAddr.z}</p>
-                <p><b>Country:</b> ${billAddr.ct}</p>
-                <p><b><br>ADITIONAL INFORMATION:<br>${info}</b></p>
+                <b>Street address:</b> ${billAddr.str1}
+                 ${billAddr.str2}
+                <b>City:</b> ${billAddr.c}
+                <b>State:</b> ${billAddr.s}
+                <b>ZIP code:</b> ${billAddr.z}
+                <b>Country:</b> ${billAddr.ct}
+                <p><b><br>ORDER SUMMARY</b></p><br>
+                ${orderSummaryHTML} <!-- Include the order summary table here -->
+                <p><b><br>ADITIONAL INFORMATION</b></p><br>${info}
+
+
             </div>
         </body>
         </html>
