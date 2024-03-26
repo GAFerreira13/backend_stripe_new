@@ -373,7 +373,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                     max-width: 600px;
                     margin: 0 auto;
                     padding: 20px;
-                    background-color: #ffffff;
+                    background-color: #f5fbfa;
                     border-radius: 5px;
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 }
@@ -384,7 +384,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                     height: auto;
                 }
                 p {
-                    margin: 0 0 10px;
+                    color: #00416b;
                 }
                 b {
                     color: #00416b;
@@ -411,33 +411,34 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         <body>
             <div class="container">
             <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/659d95ae46d190afa40905e4_fluidinova-cor-azul.png" alt="Company Logo">
-                <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </p>
-                <p>Once payment has been made and shipping has begun, we will send you an e-mail with shipping information.
-                The details of your order are as follows:</p>
-                <b>Date: </b>${datestr}
-                <p><b><br>BILLING INFORMATION <br></b></p>
-                <b>Full name:</b> ${customer.name}<br>
-                <b>E-mail:</b> ${customer.email}<br>
-                <b>Phone number:</b> ${customer.phone}<br>
-                <b>Customer type:</b> ${b2c ? 'Consumer' : 'Business'}<br>
-                <b>VAT:</b> ${customer.taxID}<br>
-                <p><b><br>SHIPPING ADDRESS <br></b></p>
-                <b>Street address:</b> ${shippingAddress.str1}<br>
-                <b>Street address 2:</b>${shippingAddress.str2}<br>
-                <b>City:</b> ${shippingAddress.c}<br>
-                <b>State:</b> ${shippingAddress.s}<br>
-                <b>ZIP code:</b> ${shippingAddress.z}<br>
-                <b>Country:</b> ${shippingAddress.ct}<br>
-                <p><b><br>BILLING ADDRESS <br></b></p>
-                <b>Street address:</b> ${billAddr.str1}<br>
-                <b>Street address 2:</b> ${billAddr.str2}<br>
-                <b>City:</b> ${billAddr.c}<br>
-                <b>State:</b> ${billAddr.s}<br>
-                <b>ZIP code:</b> ${billAddr.z}<br>
-                <b>Country:</b> ${billAddr.ct}<br>
-                <p><b><br>ORDER SUMMARY</b></p><br>
+                <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! 
+                Once payment has been made and shipping has begun, we will send you an e-mail with shipping information.
+                The details of your order are as follows:
+                <strong>Date: </strong>${datestr}
+                <strong><br>BILLING INFORMATION <br></strong>
+                <strong>Full name:</strong> ${customer.name}<br>
+                <strong>E-mail:</strong> ${customer.email}<br>
+                <strong>Phone number:</strong> ${customer.phone}<br>
+                <strong>Customer type:</strong> ${b2c ? 'Consumer' : 'Business'}<br>
+                <strong>VAT:</strong> ${customer.taxID}<br>
+                <strong><br>SHIPPING ADDRESS <br></strong>
+                <strong>Street address:</strong> ${shippingAddress.str1}<br>
+                <strong>Street address 2:</strong>${shippingAddress.str2}<br>
+                <strong>City:</strong> ${shippingAddress.c}<br>
+                <strong>State:</strong> ${shippingAddress.s}<br>
+                <strong>ZIP code:</strong> ${shippingAddress.z}<br>
+                <strong>Country:</strong> ${shippingAddress.ct}<br>
+                <strong><br>BILLING ADDRESS <br></strong>
+                <strong>Street address:</strong> ${billAddr.str1}<br>
+                <strong>Street address 2:</strong> ${billAddr.str2}<br>
+                <strong>City:</strong> ${billAddr.c}<br>
+                <strong>State:</strong> ${billAddr.s}<br>
+                <strong>ZIP code:</strong> ${billAddr.z}<br>
+                <strong>Country:</strong> ${billAddr.ct}<br>
+                <strong><br>ORDER SUMMARY</strong><br>
                 ${orderSummaryHTML} <br>
-                <p><b><br>ADITIONAL INFORMATION</b></p>${info}
+                <strong><br>ADITIONAL INFORMATION</strong>${info}<br>
+                If you have any questions, please contact sales@fluidinova.com</p>
 
 
             </div>
