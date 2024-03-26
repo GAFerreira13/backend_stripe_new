@@ -274,12 +274,15 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         </thead>
         <tbody>
     `;
-  
+    var subtotal = 0;
+    var taxed = false;
     // Iterate through each item in the cart
     cartItems.forEach(item => {
       // Calculate total for the item
-        let total = (item.tax_rates === "") ? (item.price_num * item.quantity) : (item.price_num * item.quantity * 1.23);
+        let total = item.price_num * item.quantity;
         //let total = item.price_num * item.quantity;
+        subtotal += total;
+        if (item.taxID !== "") taxed = true;
 
       total = `€${total.toFixed(2)}`;
   
@@ -308,7 +311,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     // Add free shipping row
     html += `
         <tr>
-          <td colspan="2"><strong>Free shipping</strong></td>
+          <td colspan="2"><strong>Shipping</strong></td>
           <td><strong>€0.00</strong></td>
         </tr>
     `;
@@ -317,7 +320,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     html += `
         <tr>
           <td colspan="2"><strong>Total</strong></td>
-          <td><strong>€${(subtotal).toFixed(2)}</strong></td>
+          <td><strong>€${(taxed ? subtotal*1.23 : subtotal).toFixed(2)}</strong></td>
         </tr>
     `;
   
@@ -398,7 +401,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
             <div class="container">
             <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/6570b0322488f32b8e6aab10_logo-1.svg" alt="Company Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
                 <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! </p>
-                <p>Once payment has been made, we will send you an e-mail as soon as shipping has begun.
+                <p>Once payment has been made and shipping has begun, we will send you an e-mail with shipping information.
                 The details of your order are as follows:</p>
                 <b>Date: </b>${datestr}
                 <p><b><br>BILLING INFORMATION <br></b></p>
