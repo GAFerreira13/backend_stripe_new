@@ -411,10 +411,10 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         <body>
             <div class="container">
             <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/659d95ae46d190afa40905e4_fluidinova-cor-azul.png" alt="Company Logo">
-                <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! 
+                <p>Hello ${customer.name}, we thank you for placing an order with FLUIDINOVA! <br>
                 Once payment has been made and shipping has begun, we will send you an e-mail with shipping information.
-                The details of your order are as follows:
-                <strong>Date: </strong>${datestr}
+                The details of your order are as follows:<br>
+                <strong>Date: </strong>${datestr}<br>
                 <strong><br>BILLING INFORMATION <br></strong>
                 <strong>Full name:</strong> ${customer.name}<br>
                 <strong>E-mail:</strong> ${customer.email}<br>
@@ -437,7 +437,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>Country:</strong> ${billAddr.ct}<br>
                 <strong><br>ORDER SUMMARY</strong><br>
                 ${orderSummaryHTML} <br>
-                <strong><br>ADITIONAL INFORMATION</strong>${info}<br>
+                <strong><br>ADDITIONAL INFORMATION</strong>${info}<br>
                 If you have any questions, please contact sales@fluidinova.com</p>
 
 
