@@ -399,14 +399,14 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <b>VAT:</b> ${customer.taxID}<br>
                 <p><b><br><br>SHIPPING ADDRESS <br></b></p>
                 <b>Street address:</b> ${shippingAddress.str1}<br>
-                ${shippingAddress.str2}<br>
+                <b>Street address 2:</b>${shippingAddress.str2}<br>
                 <b>City:</b> ${shippingAddress.c}<br>
                 <b>State:</b> ${shippingAddress.s}<br>
                 <b>ZIP code:</b> ${shippingAddress.z}<br>
                 <b>Country:</b> ${shippingAddress.ct}<br>
                 <p><b><br><br>BILLING ADDRESS <br></b></p>
                 <b>Street address:</b> ${billAddr.str1}<br>
-                 ${billAddr.str2}<br>
+                <b>Street address 2:</b> ${billAddr.str2}<br>
                 <b>City:</b> ${billAddr.c}<br>
                 <b>State:</b> ${billAddr.s}<br>
                 <b>ZIP code:</b> ${billAddr.z}<br>
