@@ -438,8 +438,8 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>State:</strong> ${billAddr.s}<br>
                 <strong>ZIP code:</strong> ${billAddr.z}<br>
                 <strong>Country:</strong> ${billAddr.ct}<br>
-                <strong><br>ADDITIONAL INFORMATION</strong>${info}<br></p>
-                <strong><br>ORDER SUMMARY</strong><br>
+                <strong><br>ADDITIONAL INFORMATION</strong>${info}<br>
+                <strong><br>ORDER SUMMARY</strong><br></p><br>
                 ${orderSummaryHTML} <br>
                 <p>If you have any questions, please contact sales@fluidinova.com</p>
 
