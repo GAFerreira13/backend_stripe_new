@@ -463,17 +463,22 @@ app.post('/create-checkout-session', async (req, res) => {
               
             });
  
-        res.json({ url: session.url })
-        sendCheckoutEmail(customer, shpAd, bilAd, cartItems, process.env.year, tx, b2c);
+            res.json({ url: session.url });
 
-        
-    } catch (error) {
-        res.status(500).json({ error: 'An error occurred while creating checkout session' });
-        console.error('Error creating the checkout session:', error);
-        res.redirect('https://www.fluidinova.com/cancel');
-
-    }
-});
+            // Send email asynchronously
+            sendCheckoutEmail(customer, shpAd, bilAd, cartItems, process.env.year, tx, b2c)
+                .then(() => {
+                    console.log('Checkout email sent successfully');
+                })
+                .catch(error => {
+                    console.error('Error sending checkout email:', error);
+                });
+        } catch (error) {
+            res.status(500).json({ error: 'An error occurred while creating checkout session' });
+            console.error('Error creating the checkout session:', error);
+            res.redirect('https://www.fluidinova.com/cancel');
+        }
+    });
 
 // Start the server
 const PORT = process.env.PORT || 3000;
