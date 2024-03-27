@@ -496,7 +496,7 @@ app.post('/create-checkout-session', async (req, res) => {
 
         } catch (error) {
         //res.status(500).json({ error: 'An error occurred while creating checkout session' });
-        console.log('Headers sent:', res.getHeaders());
+        //console.log('Headers sent:', res.getHeaders());
 
             console.error('Error creating the checkout session:', error);
             //res.redirect('https://www.fluidinova.com/cancel');
