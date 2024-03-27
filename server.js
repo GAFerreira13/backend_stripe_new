@@ -232,6 +232,8 @@ function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, order
             pass: process.env.emailpass
         }
     });
+    console.log("tudo ok 4");
+
     const d = new Date();
     let datestr = d.toString();
 
@@ -308,7 +310,8 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         </tbody>
       </table>
     `;
-  
+    console.log("tudo ok 5");
+
     return html;
   };
   
@@ -317,11 +320,13 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     return acc + item.price_num * item.quantity;
   }, 0);
   
-  console.log("Cart Items:", cartItems); // Add this line to log cartItems
+    console.log("Cart Items:", cartItems); // Add this line to log cartItems
+    console.log("tudo ok 10");
+
 
   // Generate order summary HTML
     const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
-    console.log("tudo ok 1");
+    console.log("tudo ok order");
     
     const mailOptions = {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
@@ -424,6 +429,8 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
+        console.log("tudo ok 15");
+
         if (error) {
             console.error('Error sending checkout email:', error);
         } else {
