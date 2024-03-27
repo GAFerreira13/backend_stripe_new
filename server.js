@@ -324,8 +324,8 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
 
 
   // Generate order summary HTML
-    //const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
-    //                ${orderSummaryHTML} <br>
+    const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
+
 
     console.log("tudo ok order");
     
@@ -419,6 +419,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>Country:</strong> ${billAddr.ct}<br>
                 <strong><br>ADDITIONAL INFORMATION</strong>${info}<br>
                 <strong><br>ORDER SUMMARY</strong><br></p><br>
+                ${orderSummaryHTML} <br> <br>
                 <p>If you have any questions, please contact sales@fluidinova.com</p>
 
 
