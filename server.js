@@ -259,14 +259,16 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         subtotal += total;
         if (item.taxID !== "") taxed = true;
 
-      total = `€${total.toFixed(2)}`;
+        total = `€${total.toFixed(2)}`;
+        //            Unit price: €${(item.price_num).toFixed(2)}
+
   
       html += `
         <tr>
           <td>
             ${item.name}<br>
             Weight: ${item.weight}<br>
-            Unit price: €${(item.price_num).toFixed(2)}
+            Unit price: € ${item.price_num}
           </td>
           <td>${item.quantity}</td>
           <td>${total}</td>
