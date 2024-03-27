@@ -8,8 +8,6 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-
-
 app.post('/signup', (req, res) => {
     // Process the signup data
     const userData = req.body;
@@ -40,26 +38,38 @@ function sendSignupEmail(userData) {
         <!DOCTYPE html>
         <html lang="en">
         <head>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>New User Signup</title>
+            <meta name="viewport" content="width=75%, initial-scale=1.0">
+            <title>Checkout</title>
             <style>
                 body {
                     background-color: #ffffff;
                     font-family: 'DM Sans', sans-serif;
                     color: #00416b;
                     padding: 20px;
+                    word-wrap: break-word; /* or overflow-wrap: break-word; */
+
                 }
                 .container {
                     max-width: 600px;
                     margin: 0 auto;
                     padding: 20px;
-                    background-color: #f0f0f0;
+                    background-color: #f5fbfa;
                     border-radius: 5px;
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 }
+                .logo {
+                    display: block;
+                    margin: 0 auto 40px; /* 40px margin bottom */
+                    max-width: 30%;
+                    height: auto;
+                }
                 p {
                     margin: 0 0 10px;
+                    color: #00416b;
                 }
                 b {
                     color: #00416b;
@@ -68,6 +78,7 @@ function sendSignupEmail(userData) {
         </head>
         <body>
             <div class="container">
+            <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/659d95ae46d190afa40905e4_fluidinova-cor-azul.png" alt="Company Logo">
                 <p><b>A new user has signed up</b></p>
                 <p><b>Name:</b> ${userData.name}</p>
                 <p><b>Email:</b> ${userData.email}</p>
@@ -119,31 +130,47 @@ function sendContactEmail(formfields) {
         <!DOCTYPE html>
         <html lang="en">
         <head>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Information Request Summary</title>
+            <meta name="viewport" content="width=75%, initial-scale=1.0">
+            <title>Checkout</title>
             <style>
                 body {
                     background-color: #ffffff;
                     font-family: 'DM Sans', sans-serif;
                     color: #00416b;
+                    padding: 20px;
+                    word-wrap: break-word; /* or overflow-wrap: break-word; */
+
                 }
                 .container {
-                    width: 700px;
+                    max-width: 600px;
                     margin: 0 auto;
-                    padding: 50px;
-                    background-color: #ffffff;
-                    border: 1px solid #cccccc;
+                    padding: 20px;
+                    background-color: #f5fbfa;
                     border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 }
-
+                .logo {
+                    display: block;
+                    margin: 0 auto 40px; /* 40px margin bottom */
+                    max-width: 30%;
+                    height: auto;
+                }
                 p {
-                    line-height: 25px;
+                    margin: 0 0 10px;
+                    color: #00416b;
+                }
+                b {
+                    color: #00416b;
                 }
             </style>
         </head>
         <body>
             <div class="container">
+            <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/659d95ae46d190afa40905e4_fluidinova-cor-azul.png" alt="Company Logo">
                 <p>${formfields.nameTitle} ${formfields.name}, thank you for your message! <br>We will contact you as soon as possible.</p>
                 <br>
                 <p><b>INFORMATION REQUEST SUMMARY</b></p>
@@ -349,6 +376,8 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                     font-family: 'DM Sans', sans-serif;
                     color: #00416b;
                     padding: 20px;
+                    word-wrap: break-word; /* or overflow-wrap: break-word; */
+
                 }
                 .container {
                     max-width: 600px;
