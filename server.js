@@ -82,9 +82,9 @@ function sendSignupEmail(userData) {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Error sending email:', error);
+            console.error('Error sending signup email:', error);
         } else {
-            console.log('Email sent:', info.response);
+            console.log('Signup email sent:', info.response);
         }
     });
 }
@@ -320,7 +320,8 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
   console.log("Cart Items:", cartItems); // Add this line to log cartItems
 
   // Generate order summary HTML
-  const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
+    const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
+    console.log("tudo ok 1");
     
     const mailOptions = {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
@@ -462,8 +463,10 @@ app.post('/create-checkout-session', async (req, res) => {
             }
               
             });
- 
+            console.log("tudo ok 2");
+
             res.json({ url: session.url });
+            console.log("tudo ok 3");
 
             // Send email asynchronously
             sendCheckoutEmail(customer, shpAd, bilAd, cartItems, process.env.year, tx, b2c)
