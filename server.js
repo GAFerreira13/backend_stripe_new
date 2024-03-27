@@ -3,35 +3,12 @@ const app = express();
 const stripe = require('stripe')(process.env.API_KEY);
 const axios = require('axios').default;
 const nodemailer = require('nodemailer');
-//const redis = require('redis');
-//const client = redis.createClient();
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
 
-//client.set('count', 1, redis.print);
 
-/*app.post('/increment', (req, res) => {
-    client.incr('count', (err, newCount) => {
-        if (err) {
-            console.error('Error incrementing count:', err);
-            return res.status(500).json({ error: 'Internal Server Error' });
-        }
-        res.status(200).json({ count: newCount });
-    });
-});
-
-// Get current count
-app.get('/count', (req, res) => {
-    client.get('count', (err, count) => {
-        if (err) {
-            console.error('Error getting count:', err);
-            return res.status(500).json({ error: 'Internal Server Error' });
-        }
-        res.status(200).json({ count: count || 0 });
-    });
-});*/
 
 app.post('/signup', (req, res) => {
     // Process the signup data
@@ -59,7 +36,6 @@ function sendSignupEmail(userData) {
         to: 'sales@fluidinova.com',
 
         subject: 'New User Signup',
-        //html: `<p><b>A new user has signed up</b></p><p><b>Name:</b> ${userData.name}</p><p><b>Email:</b> ${userData.email}</p><p><b>Activity:</b> ${userData.activity}</p><p><b>Type of application:</b> ${userData.application}</p><p><b>Receive communications:</b> ${userData.acceptcomm}</p>`
         html: `
         <!DOCTYPE html>
         <html lang="en">
@@ -139,7 +115,6 @@ function sendContactEmail(formfields) {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
         to: ['sales@fluidinova.com', formfields.email],
         subject: 'nanoXIM Information Request',
-        //html: `<p>${formfields.nameTitle} ${formfields.name}, thank you for your message! <br>We will contact you as soon as possible.<br><br><br><b>INFORMATION REQUEST SUMMARY</b></p></p><p><b>Activity:</b> ${formfields.activity}</p><p><b>Job:</b> ${formfields.job}</p><p><b>Company:</b> ${formfields.company}</p><p><b>Application:</b> ${formfields.application}</p><p><b>Country:</b> ${formfields.country}</p><p><b>E-mail:</b> ${formfields.email}</p><p><b>Phone number:</b> ${formfields.phone}</p><p><b>Item:</b> ${formfields.itemSelection}</p><p><b>Message:</b> ${formfields.message}</p><br>Best Regards,<br>FLUIDINOVA`
         html: `
         <!DOCTYPE html>
         <html lang="en">
@@ -191,9 +166,9 @@ function sendContactEmail(formfields) {
 
     transporter.sendMail(mailOptions2, (error, info) => {
         if (error) {
-            console.error('Error sending email:', error);
+            console.error('Error sending contact email:', error);
         } else {
-            console.log('Email sent:', info.response);
+            console.log('contact email sent:', info.response);
         }
     });
 }
@@ -278,15 +253,12 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     var taxed = false;
     // Iterate through each item in the cart
     cartItems.forEach(item => {
-      // Calculate total for the item
         let total = item.price_num * item.quantity;
-        //let total = item.price_num * item.quantity;
         subtotal += total;
         if (item.taxID !== "") taxed = true;
 
       total = `€${total.toFixed(2)}`;
   
-      // Construct table row for the item
       html += `
         <tr>
           <td>
@@ -452,9 +424,9 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Error sending email:', error);
+            console.error('Error sending checkout email:', error);
         } else {
-            console.log('Email sent:', info.response);
+            console.log('checkout email sent:', info.response);
         }
     });
 }
