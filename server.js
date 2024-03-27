@@ -488,18 +488,18 @@ app.post('/create-checkout-session', async (req, res) => {
 
             res.json({ url: session.url });
         console.log("tudo ok 3");
-        console.log('Headers sent:', res.getHeaders());
+        //console.log('Headers sent:', res.getHeaders());
 
 
             // Send email asynchronously
         await sendEmailAfterCheckout(customer, shpAd, bilAd, cartItems, tx, b2c);
 
         } catch (error) {
-        res.status(500).json({ error: 'An error occurred while creating checkout session' });
+        //res.status(500).json({ error: 'An error occurred while creating checkout session' });
         console.log('Headers sent:', res.getHeaders());
 
             console.error('Error creating the checkout session:', error);
-            res.redirect('https://www.fluidinova.com/cancel');
+            //res.redirect('https://www.fluidinova.com/cancel');
         }
     });
 
