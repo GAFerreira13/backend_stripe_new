@@ -64,7 +64,7 @@ function sendSignupEmail(userData) {
                 .logo {
                     display: block;
                     margin: 0 auto 40px; /* 40px margin bottom */
-                    max-width: 350px;
+                    max-width: 30%;
                     height: auto;
                 }
                 p {
@@ -156,7 +156,7 @@ function sendContactEmail(formfields) {
                 .logo {
                     display: block;
                     margin: 0 auto 40px; /* 40px margin bottom */
-                    max-width: 350px;
+                    max-width: 30%;
                     height: auto;
                 }
                 p {
@@ -390,7 +390,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 .logo {
                     display: block;
                     margin: 0 auto 40px; /* 40px margin bottom */
-                    max-width: 350px;
+                    max-width: 30%;
                     height: auto;
                 }
                 p {
@@ -429,25 +429,25 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 The details of your order are as follows:</p>
                 <p><strong>Date: </strong>${datestr}<br>
                 <strong><br>BILLING INFORMATION <br></strong>
-                <strong>Full name:</strong> ${customer.name}<br>
-                <strong>E-mail:</strong> ${customer.email}<br>
-                <strong>Phone number:</strong> ${customer.phone}<br>
-                <strong>Customer type:</strong> ${b2c ? 'Consumer' : 'Business'}<br>
-                <strong>VAT:</strong> ${customer.taxID}<br>
+                <strong>Full name: </strong>${customer.name}<br>
+                <strong>E-mail: </strong>${customer.email}<br>
+                <strong>Phone number: </strong>${customer.phone}<br>
+                <strong>Customer type: </strong>${b2c ? 'Consumer' : 'Business'}<br>
+                <strong>VAT: </strong>${customer.taxID}<br>
                 <strong><br>SHIPPING ADDRESS <br></strong>
-                <strong>Street address:</strong> ${shippingAddress.str1}<br>
-                <strong>Street address 2:</strong>${shippingAddress.str2}<br>
-                <strong>City:</strong> ${shippingAddress.c}<br>
-                <strong>State:</strong> ${shippingAddress.s}<br>
-                <strong>ZIP code:</strong> ${shippingAddress.z}<br>
-                <strong>Country:</strong> ${shippingAddress.ct}<br>
+                <strong>Street address: </strong>${shippingAddress.str1}<br>
+                <strong>Street address 2: </strong>${shippingAddress.str2}<br>
+                <strong>City: </strong>${shippingAddress.c}<br>
+                <strong>State: </strong>${shippingAddress.s}<br>
+                <strong>ZIP code: </strong>${shippingAddress.z}<br>
+                <strong>Country: </strong>${shippingAddress.ct}<br>
                 <strong><br>BILLING ADDRESS <br></strong>
-                <strong>Street address:</strong> ${billAddr.str1}<br>
-                <strong>Street address 2:</strong> ${billAddr.str2}<br>
-                <strong>City:</strong> ${billAddr.c}<br>
-                <strong>State:</strong> ${billAddr.s}<br>
-                <strong>ZIP code:</strong> ${billAddr.z}<br>
-                <strong>Country:</strong> ${billAddr.ct}<br>
+                <strong>Street address: </strong>${billAddr.str1}<br>
+                <strong>Street address 2: </strong>${billAddr.str2}<br>
+                <strong>City: </strong>${billAddr.c}<br>
+                <strong>State: </strong>${billAddr.s}<br>
+                <strong>ZIP code: </strong>${billAddr.z}<br>
+                <strong>Country: </strong>${billAddr.ct}<br>
                 <strong><br>ADDITIONAL INFORMATION</strong><br>${info}<br>
                 <strong><br>ORDER SUMMARY</strong><br></p><br>
                 ${orderSummaryHTML} <br> <br>
