@@ -64,7 +64,7 @@ function sendSignupEmail(userData) {
                 .logo {
                     display: block;
                     margin: 0 auto 40px; /* 40px margin bottom */
-                    max-width: 30%;
+                    max-width: 350px;
                     height: auto;
                 }
                 p {
@@ -156,7 +156,7 @@ function sendContactEmail(formfields) {
                 .logo {
                     display: block;
                     margin: 0 auto 40px; /* 40px margin bottom */
-                    max-width: 30%;
+                    max-width: 350px;
                     height: auto;
                 }
                 p {
@@ -390,7 +390,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 .logo {
                     display: block;
                     margin: 0 auto 40px; /* 40px margin bottom */
-                    max-width: 30%;
+                    max-width: 350px;
                     height: auto;
                 }
                 p {
