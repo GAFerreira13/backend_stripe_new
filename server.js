@@ -490,7 +490,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
             }
 
 app.post('/create-checkout-session', async (req, res) => {
-    const { customer, shpAd, bilAd, cartItems, tx, b2c} = req.body;
+    const { customer, shpAd, bilAd, cartItems, tx, b2c, t} = req.body;
 
     try {
         const session = await stripe.checkout.sessions.create({
@@ -501,7 +501,7 @@ app.post('/create-checkout-session', async (req, res) => {
             line_items: cartItems.map(item => ({
                 price: item.price,
                 quantity: item.quantity,
-                tax_rates: [item.tax_rates]
+                tax_rates: (t ? [process.env.taxrate] : [])
             })),
               mode: 'payment',
               success_url: 'https://www.fluidinova.com/success',
