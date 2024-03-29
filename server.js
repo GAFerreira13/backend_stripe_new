@@ -249,7 +249,7 @@ app.get('/validate-vat/:vat_number', async (req, res) => {
     }
 });
 
-function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, orderid, info, b2c) {
+function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, orderid, info, b2c, t) {
     const transporter = nodemailer.createTransport({
         host: 'plesk01.redicloud.pt',
         port: 465,
@@ -279,12 +279,10 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         <tbody>
     `;
     var subtotal = 0;
-    var taxed = false;
     // Iterate through each item in the cart
     cartItems.forEach(item => {
         let total = item.price_num * item.quantity;
         subtotal += total;
-        if (item.taxID !== "") taxed = true;
 
         total = `€${total.toFixed(2)}`;
         //            Unit price: €${(item.price_num).toFixed(2)}
@@ -314,7 +312,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     html += `
         <tr>
           <td colspan="2"><strong>VAT (23%)</strong></td>
-          <td>€${taxed ? (subtotal*0.23).toFixed(2) : "0"}</td>
+          <td>€${t ? (subtotal*0.23).toFixed(2) : "0"}</td>
         </tr>
     `;
   
@@ -330,7 +328,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     html += `
         <tr>
           <td colspan="2"><strong>Total</strong></td>
-          <td><strong>€${(taxed ? subtotal*1.23 : subtotal).toFixed(2)}</strong></td>
+          <td><strong>€${(t ? subtotal*1.23 : subtotal).toFixed(2)}</strong></td>
         </tr>
     `;
   
@@ -339,7 +337,6 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
         </tbody>
       </table>
     `;
-    console.log("tudo ok 5");
     return html;
   };
   
@@ -349,7 +346,6 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
   }, 0);
   
     console.log("Cart Items:", cartItems); // Add this line to log cartItems
-    console.log("tudo ok 10");
 
 
   // Generate order summary HTML
@@ -434,6 +430,9 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>Phone number: </strong>${customer.phone}<br>
                 <strong>Customer type: </strong>${b2c ? 'Consumer' : 'Business'}<br>
                 <strong>VAT: </strong>${customer.taxID}<br>
+                <strong>Region: </strong>${customer.reg}<br>
+                <strong>Tax: </strong>${t}<br>
+
                 <strong><br>SHIPPING ADDRESS <br></strong>
                 <strong>Street address: </strong>${shippingAddress.str1}<br>
                 <strong>Street address 2: </strong>${shippingAddress.str2}<br>
@@ -475,9 +474,9 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 allowed_countries: ['AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BE', 'BZ', 'BJ', 'BM', 'BT', 'BO', 'BQ', 'BA', 'BW', 'BR', 'IO', 'VG', 'BN', 'BG', 'BF', 'BI', 'CV', 'KH', 'CM', 'CA', 'KY', 'TD', 'CL', 'CN', 'CX', 'CC', 'CO', 'CK', 'CR', 'HR', 'CW', 'CY', 'CZ', 'CD', 'DK', 'DJ', 'DM', 'DO', 'EC', 'EG', 'SV', 'ER', 'EE', 'SZ', 'ET', 'FO', 'FJ', 'FI', 'FR', 'GF', 'PF', 'TF', 'GA', 'GM', 'GE', 'DE', 'GH', 'PI', 'GR', 'GL', 'GD', 'GP', 'GU', 'GT', 'GG', 'GY', 'HT', 'HN', 'HK', 'HU', 'IS', 'IN', 'ID', 'DQ', 'IE', 'IM', 'IL', 'IT', 'CI', 'JM', 'JP', 'JE', 'JO', 'KZ', 'KE', 'XK', 'KW', 'KG', 'LA', 'LV', 'LB', 'LS', 'LR', 'LY', 'LI', 'LT', 'LU', 'MO', 'MG', 'MW', 'MY', 'MV', 'ML', 'MT', 'MH', 'MQ', 'MR', 'MU', 'MX', 'FM', 'MD', 'MC', 'MN', 'ME', 'MS', 'MA', 'MZ', 'NA', 'NP', 'NL', 'NC', 'NZ', 'NI', 'NE', 'NG', 'NF', 'MK', 'MP', 'NO', 'OM', 'PK', 'PW', 'PS', 'PA', 'PG', 'PY', 'PE', 'PH', 'PN', 'PL', 'PT', 'PR', 'QA', 'CG', 'RE', 'RO', 'RW', 'BL', 'KN', 'LC', 'MF', 'VC', 'WS', 'SM', 'SA', 'SN', 'RS', 'SC', 'SG', 'SX', 'SK', 'SI', 'ZA', 'GS', 'KR', 'SS', 'ES', 'LK', 'SR', 'SJ', 'SE', 'CH', 'TQ', 'TZ', 'TH', 'TL', 'TG', 'TO', 'TT', 'TN', 'TR', 'TM', 'TC', 'VI', 'UG', 'AE', 'GB', 'US', 'UM', 'UY', 'UZ', 'VU', 'VA', 'VE', 'VN', 'WF', 'EH', 'ZM', 'ZW'],
               },*/
 
-              function sendEmailAfterCheckout(customer, shpAd, bilAd, cartItems, tx, b2c) {
+              function sendEmailAfterCheckout(customer, shpAd, bilAd, cartItems, tx, b2c, t) {
                 return new Promise((resolve, reject) => {
-                    sendCheckoutEmail(customer, shpAd, bilAd, cartItems, process.env.year, tx, b2c)
+                    sendCheckoutEmail(customer, shpAd, bilAd, cartItems, process.env.year, tx, b2c, t)
                         .then(() => {
                             console.log('Checkout email sent successfully');
                             resolve();
@@ -516,15 +515,11 @@ app.post('/create-checkout-session', async (req, res) => {
             }
               
             });
-            console.log("tudo ok 2");
 
             res.json({ url: session.url });
-        console.log("tudo ok 3");
         //console.log('Headers sent:', res.getHeaders());
 
-
-            // Send email asynchronously
-        await sendEmailAfterCheckout(customer, shpAd, bilAd, cartItems, tx, b2c);
+        await sendEmailAfterCheckout(customer, shpAd, bilAd, cartItems, tx, b2c, t);
 
         } catch (error) {
         //res.status(500).json({ error: 'An error occurred while creating checkout session' });
