@@ -121,6 +121,7 @@ function sendContactEmail(formfields) {
             pass: process.env.emailpass
         }
     });
+    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
 
     const mailOptions2 = {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
@@ -178,7 +179,7 @@ function sendContactEmail(formfields) {
                 <p><b>Job:</b> ${formfields.job}</p>
                 <p><b>Company:</b> ${formfields.company}</p>
                 <p><b>Application:</b> ${formfields.application}</p>
-                <p><b>Country:</b> ${formfields.country}</p>
+                <p><b>Country:</b> ${regionNames.of(formfields.country)}</p>
                 <p><b>E-mail:</b> ${formfields.email}</p>
                 <p><b>Phone number:</b> ${formfields.phone}</p>
                 <p><b>Item:</b> ${formfields.itemSelection}</p>
@@ -259,7 +260,6 @@ function sendCheckoutEmail(customer, shippingAddress, billAddr, cartItems, order
             pass: process.env.emailpass
         }
     });
-    console.log("tudo ok 4");
 
     const d = new Date();
     let datestr = d.toString();
@@ -350,10 +350,9 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
 
   // Generate order summary HTML
     const orderSummaryHTML = generateOrderSummaryHTML(cartItems, subtotal);
-
-
     console.log("tudo ok order");
-    
+    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+
     const mailOptions = {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
         to: ['sales@fluidinova.com', customer.email],
@@ -439,7 +438,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>City: </strong>${shippingAddress.c}<br>
                 <strong>State: </strong>${shippingAddress.s}<br>
                 <strong>ZIP code: </strong>${shippingAddress.z}<br>
-                <strong>Country: </strong>${shippingAddress.ct}<br>
+                <strong>Country: </strong>${regionNames.of(shippingAddress.ct)}<br>
                 <strong><br>BILLING ADDRESS <br></strong>
                 <strong>Street address: </strong>${billAddr.str1}<br>
                 <strong>Street address 2: </strong>${billAddr.str2}<br>
