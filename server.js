@@ -446,7 +446,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>City: </strong>${billAddr.c}<br>
                 <strong>State: </strong>${billAddr.s}<br>
                 <strong>ZIP code: </strong>${billAddr.z}<br>
-                <strong>Country: </strong>${billAddr.ct}<br>
+                <strong>Country: </strong>${regionNames.of(billAddr.ct)}<br>
                 <strong><br>ADDITIONAL INFORMATION</strong><br>${info}<br>
                 <strong><br>ORDER SUMMARY</strong><br></p><br>
                 ${orderSummaryHTML} <br> <br>
