@@ -121,7 +121,23 @@ function sendContactEmail(formfields) {
             pass: process.env.emailpass
         }
     });
-    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+
+    function getCountryName(countryCode) {
+        try {
+            const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+            return regionNames.of(countryCode);
+        } catch (error) {
+            if (error instanceof RangeError) {
+                console.error('Invalid country code:', countryCode);
+            } else {
+                console.error('Error getting country name:', error);
+            }
+            // Return a default value or the original input
+            return countryCode;
+        }
+    }
+
+    const countryName = getCountryName(formfields.country);
 
     const mailOptions2 = {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
@@ -181,7 +197,7 @@ function sendContactEmail(formfields) {
                 <p><b>Job:</b> ${formfields.job}</p>
                 <p><b>Company:</b> ${formfields.company}</p>
                 <p><b>Application:</b> ${formfields.application}</p>
-                <p><b>Country:</b> ${regionNames.of(formfields.country)}</p>
+                <p><b>Country:</b> ${countryName}</p>
                 <p><b>E-mail:</b> ${formfields.email}</p>
                 <p><b>Phone number:</b> ${formfields.phone}</p>
                 <p><b>Item:</b> ${formfields.itemSelection}</p>
