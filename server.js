@@ -436,6 +436,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>Tax: </strong>${t}<br>
 
                 <strong><br>SHIPPING ADDRESS <br></strong>
+                <strong>Name: </strong>${shippingAddress.fullName}<br>
                 <strong>Street address: </strong>${shippingAddress.str1}<br>
                 <strong>Street address 2: </strong>${shippingAddress.str2}<br>
                 <strong>City: </strong>${shippingAddress.c}<br>
