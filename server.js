@@ -433,8 +433,6 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>Customer type: </strong>${b2c ? 'Consumer' : 'Company'}<br>
                 <strong>VAT: </strong>${customer.taxID}<br>
                 <strong>Region: </strong>${customer.reg}<br>
-                <strong>Tax: </strong>${t}<br>
-
                 <strong><br>SHIPPING ADDRESS <br></strong>
                 <strong>Name: </strong>${shippingAddress.fullName}<br>
                 <strong>Street address: </strong>${shippingAddress.str1}<br>
