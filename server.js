@@ -172,8 +172,10 @@ function sendContactEmail(formfields) {
         <body>
             <div class="container">
             <img class="logo" src="https://uploads-ssl.webflow.com/64a6f64c060e8fd934d2d554/659d95ae46d190afa40905e4_fluidinova-cor-azul.png" alt="Company Logo">
-                <p>${formfields.nameTitle} ${formfields.name}, thank you for your message! <br>We will contact you as soon as possible.</p>
-                <br>
+            <p>${formfields.nameTitle !== "Select a title" ? formfields.nameTitle + " " : ""} ${formfields.name},
+            thank you for your message! <br>We will contact you as soon as possible.
+          </p>
+          <br>
                 <p><b>INFORMATION REQUEST SUMMARY</b></p>
                 <p><b>Activity:</b> ${formfields.activity}</p>
                 <p><b>Job:</b> ${formfields.job}</p>
