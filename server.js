@@ -295,7 +295,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
           <td>
             ${item.name}<br>
             Weight: ${item.weight}<br>
-            Unit price: € ${item.price_num}
+            Unit price: € ${item.price_num.toFixed(2)}
           </td>
           <td>${item.quantity}</td>
           <td>${total}</td>
@@ -306,22 +306,22 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     // Add subtotal row
     html += `
         <tr>
-          <td colspan="2"><strong>Subtotal</strong></td>
+          <td colspan="2" style="text-align: right;"><strong>Subtotal</strong></td>
           <td>€${subtotal.toFixed(2)}</td>
         </tr>
     `;
     //VAT row
     html += `
         <tr>
-          <td colspan="2"><strong>VAT (23%)</strong></td>
-          <td>€${t ? (subtotal*0.23).toFixed(2) : "0"}</td>
+          <td colspan="2" style="text-align: right;"><strong>VAT (23%)</strong></td>
+          <td>€${t ? (subtotal*0.23).toFixed(2) : "N/A"}</td>
         </tr>
     `;
   
     // Add free shipping row
     html += `
         <tr>
-          <td colspan="2"><strong>Shipping</strong></td>
+          <td colspan="2" style="text-align: right;"><strong>Shipping</strong></td>
           <td>€0.00</td>
         </tr>
     `;
@@ -329,7 +329,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     // Add total row
     html += `
         <tr>
-          <td colspan="2"><strong>Total</strong></td>
+          <td colspan="2" style="text-align: right;"><strong>Total</strong></td>
           <td><strong>€${(t ? subtotal*1.23 : subtotal).toFixed(2)}</strong></td>
         </tr>
     `;
@@ -430,7 +430,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 <strong>Full name: </strong>${customer.name}<br>
                 <strong>E-mail: </strong>${customer.email}<br>
                 <strong>Phone number: </strong>${customer.phone}<br>
-                <strong>Customer type: </strong>${b2c ? 'Consumer' : 'Business'}<br>
+                <strong>Customer type: </strong>${b2c ? 'Consumer' : 'Company'}<br>
                 <strong>VAT: </strong>${customer.taxID}<br>
                 <strong>Region: </strong>${customer.reg}<br>
                 <strong>Tax: </strong>${t}<br>
