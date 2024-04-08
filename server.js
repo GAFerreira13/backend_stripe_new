@@ -84,7 +84,7 @@ function sendSignupEmail(userData) {
                 <p><b>Email:</b> ${userData.email}</p>
                 <p><b>Activity:</b> ${userData.activity}</p>
                 <p><b>Type of application:</b> ${userData.application}</p>
-                <p><b>Receive communications:</b> ${userData.acceptcomm}</p>
+                <p><b>Receive communications:</b> ${userData.acceptcomm ? 'Yes' : 'No'}</p>
             </div>
         </body>
         </html>
