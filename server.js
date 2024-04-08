@@ -443,7 +443,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
                 The details of your order are as follows:</p>
                 <p><strong>Date: </strong>${datestr}<br>
                 <strong><br>BILLING INFORMATION <br></strong>
-                <strong>Full name: </strong>${customer.name}<br>
+                <strong>${b2c ? 'Full' : 'Company'} name: </strong>${customer.name}<br>
                 <strong>E-mail: </strong>${customer.email}<br>
                 <strong>Phone number: </strong>${customer.phone}<br>
                 <strong>Customer type: </strong>${b2c ? 'Consumer' : 'Company'}<br>
