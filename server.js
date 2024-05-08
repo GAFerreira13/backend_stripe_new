@@ -31,7 +31,7 @@ function sendSignupEmail(userData) {
 
     const mailOptions = {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
-        to: 'sales@fluidinova.com',
+        to: ['sales@fluidinova.com', 'gon.skater@hotmail.com'],
 
         subject: 'New User Signup',
         html: `
