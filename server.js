@@ -373,7 +373,7 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
 
     const mailOptions = {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
-        to: ['sales@fluidinova.com', 'geral@fluidinova.com', customer.email],
+        to: ['sales@fluidinova.com', 'finance@fluidinova.com', customer.email],
 
         subject: `Your nanoXIM Order`,
         html: `
