@@ -31,7 +31,7 @@ function sendSignupEmail(userData) {
 
     const mailOptions = {
         from: 'FLUIDINOVA <forms@fluidinova.pt>',
-        to: ['sales@fluidinova.com', 'gon.skater@hotmail.com'],
+        to: ['sales@fluidinova.com'],
 
         subject: 'New User Signup',
         html: `
@@ -477,8 +477,6 @@ const generateOrderSummaryHTML = (cartItems, subtotal) => {
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
-        console.log("tudo ok 15");
-
         if (error) {
             console.error('Error sending checkout email:', error);
         } else {
